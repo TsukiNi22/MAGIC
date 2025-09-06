@@ -16,6 +16,7 @@ File Name:
 File Description:
 ##  Main file of project
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+from tkinter import TclError
 
 """ Import """
 # Import that can't be in the try
@@ -25,6 +26,7 @@ from sys import exit
 # Import that can be checked
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
+    from app import app # Main app setup & call of functions
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -36,10 +38,19 @@ if __name__ != "__main__":
     exit(Error.FATAL_ERROR)
 
 # Setup of the main window
-window = ctk.CTk()
+try:
+    window = ctk.CTk()
+except TclError as e:
+    print(f"Tkinter Initialisation Error: {e}")
+    exit(Error.FATAL_ERROR)
 
 # Call of the main program
-# Nothing for now
+ret = app(window)
+if ret != Return.OK:
+    exit(ret)
 
-# Loop to keep the window alive
+# Loop to keep the main window alive
 window.mainloop()
+
+# Program end
+exit(Return.OK)
