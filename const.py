@@ -1,0 +1,33 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ ██╗  ██╗ █████╗ ██████╗ ████████╗ █████╗ ███╗   ██╗██╗ █████╗ 
+ ╚██╗██╔╝██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗  ██║██║██╔══██╗
+  ╚███╔╝ ███████║██████╔╝   ██║   ███████║██╔██╗ ██║██║███████║
+  ██╔██╗ ██╔══██║██╔══██╗   ██║   ██╔══██║██║╚██╗██║██║██╔══██║
+ ██╔╝ ██╗██║  ██║██║  ██║   ██║   ██║  ██║██║ ╚████║██║██║  ██║
+ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
+
+Edition:
+##  07/09/2025 by Tsukini
+
+File Name:
+##  const.py
+
+File Description:
+##  Constants of the project
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+class Return:
+    """
+    Return values
+    """
+    OK = 0 # Return value upon success on a call function
+    KO = 1 # Return value upon fail on a call function
+
+class Error:
+    """
+    Error values
+    """
+    FATAL_ERROR = 0b1000 # Global error, the program whole execution won't be able to run after this
+    LOCAL_ERROR = 0b100 # Local error, the program local execution won't probably be able to run after this
+    ACTION_ERROR = 0b10 # Same~~ as Return.KO, a program action execution won't be able to run after this
