@@ -82,14 +82,11 @@ class Text:
     """
         Text in the different languages
     """
+    LANGUAGE = "eng" # Language used
 
     # English version
     english = {
         "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card Material"],
-        "Save Parameter": "Save Parameter",
-        "Parameter Manager": "Parameter Manager",
-        "Script Editor": "Script Editor",
-        "Update Card Material": "Update Card Material",
         "Sort": "Short By",
         "Sort N": "Number",
         "Sort Type": "Short By Type",

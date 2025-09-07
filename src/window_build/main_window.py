@@ -41,10 +41,10 @@ def setup_tab(window):
     tab = ctk.CTkFrame(window, fg_color=Color.GREY, corner_radius=10)
 
     # Build the different button
-    button_names = Text.LANGUAGES["eng"]["Tab Buttons"]
+    button_names = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     button_functions = [print("Nop"), print("Nop"), print("Nop"), print("Nop")]
     for i in range(len(button_names)):
-        button = ctk.CTkButton(tab, fg_color=Color.BLUE, text=Text.LANGUAGES["eng"][button_names[i]],
+        button = ctk.CTkButton(tab, fg_color=Color.BLUE, text=button_names[i],
             width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
             font=Window.BUTTON_FONT, command=lambda: button_functions[i])
         button.grid(column=i, row=0, padx=Window.BUTTON_PADX, pady=Window.BUTTON_PADY)
@@ -60,13 +60,13 @@ def setup_peripheral_device_list(window):
 
     # Sort options setup
     sort_list_var = ctk.StringVar()
-    options = [Text.LANGUAGES["eng"]["Sort"] + " " + Text.LANGUAGES["eng"]["Sort N"],
-                Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort B/P"],
-                Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort P/B"]]
+    options = [Text.LANGUAGES[Text.LANGUAGE]["Sort"] + " " + Text.LANGUAGES[Text.LANGUAGE]["Sort N"],
+                Text.LANGUAGES[Text.LANGUAGE]["Sort Type"] + " " + Text.LANGUAGES[Text.LANGUAGE]["Sort B/P"],
+                Text.LANGUAGES[Text.LANGUAGE]["Sort Type"] + " " + Text.LANGUAGES[Text.LANGUAGE]["Sort P/B"]]
     sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color=Color.DARK_GREY,button_color=Color.DARK_GREY, values=options,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
         font=Window.BUTTON_FONT, dynamic_resizing=True, command=print("Nop"), variable=sort_list_var)
-    sort_list.set("三 " + Text.LANGUAGES["eng"]["Sort"] + " ...")
+    sort_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Sort"] + " ...")
     sort_list.place(x=75, y=Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2) + (Window.FRAME_PADY * 2))
 
     # Setup the list of to handle the peripheral device information display
@@ -84,19 +84,19 @@ def setup_card_tab(window):
     # Upload arduino program button
     card_upload = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        text=Text.LANGUAGES["eng"]["Card Upload"], font=Window.BUTTON_FONT, command=print("Nop"))
+        text=Text.LANGUAGES[Text.LANGUAGE]["Card Upload"], font=Window.BUTTON_FONT, command=print("Nop"))
     card_upload.place(x=Window.WIDTH - (Window.BUTTON_PADX * 3 + Window.BUTTON_WIDTH * 2) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
     # Manual select of the arduino port
     card_manual_port = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
         width=Window.BUTTON_WIDTH,  height=Window.BUTTON_HEIGHT, corner_radius=10,
-        text=Text.LANGUAGES["eng"]["Manual Port"], font=Window.BUTTON_FONT, command=print("Nop"))
+        text=Text.LANGUAGES[Text.LANGUAGE]["Manual Port"], font=Window.BUTTON_FONT, command=print("Nop"))
     card_manual_port.place(x=Window.WIDTH - (Window.BUTTON_PADX + Window.BUTTON_WIDTH) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
     # Warning message
     warning_label = ctk.CTkLabel(window, bg_color='transparent', text_color='yellow',
         width=Window.LABEL_WIDTH,  height=Window.LABEL_HEIGHT, corner_radius=10,
-        text=Text.LANGUAGES["eng"]["Warning"], font=Window.LABEL_FONT)
+        text=Text.LANGUAGES[Text.LANGUAGE]["Warning"], font=Window.LABEL_FONT)
     warning_label.place(x=Window.BUTTON_PADX, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.LABEL_PADY))
 
 def build(window):
