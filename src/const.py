@@ -38,21 +38,40 @@ class Window:
     """
 
     # Main
-    WIDTH = 1200 # X size of the window
-    HEIGHT = 800 # Y size of the window
+    WIDTH = 1175 # X size of the window
+    HEIGHT = 760 # Y size of the window
+
+    # Scrollable Frame
+    SCROLLABLE_FRAME_WIDTH = 1075 # X size of the scrollable frame
+    SCROLLABLE_FRAME_HEIGHT = 550 # Y size of the scrollable frame
 
     # Frame
-    FRAME_COLOR = "#2D2D2D" # Background color of the frames
     FRAME_PADX = 15 # Padding X of the frames
     FRAME_PADY = 15 # Padding Y of the frames
 
     # Button
-    BUTTON_COLOR = "#2F64B4" # Background color of the buttons
     BUTTON_FONT = ("Arial", 25) # Font used for the buttons
     BUTTON_WIDTH = 250 # X size of the buttons
     BUTTON_HEIGHT = 40 # Y size of the buttons
     BUTTON_PADX = 15 # Padding X of the buttons
     BUTTON_PADY = 7.5 # Padding Y of the buttons
+
+    # Label
+    LABEL_FONT = ("Arial", 20) # Font used for the labels
+    LABEL_WIDTH = 250 # X size of the labels
+    LABEL_HEIGHT = 40 # Y size of the labels
+    LABEL_PADX = 15 # Padding X of the labels
+    LABEL_PADY = 12.5 # Padding Y of the labels
+
+class Color:
+    """
+        Different colors
+    """
+    DARK_GREY = "#222222"
+    GREY = "#2D2D2D"
+    DARK_RED = "#550E0E"
+    RED = "#741010"
+    BLUE = "#2F64B4"
 
 class Text:
     """
@@ -61,6 +80,7 @@ class Text:
 
     # English version
     english = {
+        "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card Material"],
         "Save Parameter": "Save Parameter",
         "Parameter Manager": "Parameter Manager",
         "Script Editor": "Script Editor",
@@ -70,6 +90,9 @@ class Text:
         "Sort Type": "Short By Type",
         "Sort B/P": "Button / Potentiometer",
         "Sort P/B": "Potentiometer / Button",
+        "Card Upload": "Upload Card Program",
+        "Manual Port": "Manual Card Port Selection",
+        "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
     }
 
     # Language selection

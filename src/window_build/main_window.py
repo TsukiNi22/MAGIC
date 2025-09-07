@@ -22,7 +22,7 @@ from setuptools.windows_support import windows_only
 
 """ Import """
 # Import that can't be in the try
-from src.const import Return, Error, Window, Text
+from src.const import Return, Error, Window, Color, Text
 from sys import exit
 
 # Import that can be checked
@@ -75,13 +75,13 @@ def setup_tab(window):
     """
 
     # Tab that will contain the button
-    tab = ctk.CTkFrame(window, fg_color=Window.FRAME_COLOR, corner_radius=10)
+    tab = ctk.CTkFrame(window, fg_color=Color.GREY, corner_radius=10)
 
     # Build the different button
-    button_names = ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card Material"]
+    button_names = Text.LANGUAGES["eng"]["Tab Buttons"]
     button_functions = [print("Nop"), print("Nop"), print("Nop"), print("Nop")]
     for i in range(len(button_names)):
-        button = ctk.CTkButton(tab, fg_color=Window.BUTTON_COLOR, text=Text.LANGUAGES["eng"][button_names[i]],
+        button = ctk.CTkButton(tab, fg_color=Color.BLUE, text=Text.LANGUAGES["eng"][button_names[i]],
             width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
             font=Window.BUTTON_FONT, command=lambda: button_functions[i])
         button.grid(column=i, row=0, padx=Window.BUTTON_PADX, pady=Window.BUTTON_PADY)
@@ -100,20 +100,41 @@ def setup_peripheral_device_list(window):
     options = [Text.LANGUAGES["eng"]["Sort"] + " " + Text.LANGUAGES["eng"]["Sort N"],
                 Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort B/P"],
                 Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort P/B"]]
-    sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color='#222222',button_color='#222222', values=options,
+    sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color=Color.DARK_GREY,button_color=Color.DARK_GREY, values=options,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        font=Window.BUTTON_FONT, dynamic_resizing=True, command=print(2), variable=sort_list_var)
+        font=Window.BUTTON_FONT, dynamic_resizing=True, command=print("Nop"), variable=sort_list_var)
     sort_list.set("三 " + Text.LANGUAGES["eng"]["Sort"] + " ...")
     sort_list.place(x=75, y=Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2) + (Window.FRAME_PADY * 2))
 
+    # Setup the list of to handle the peripheral device information display
+    scrollable_frame = ctk.CTkScrollableFrame(window, fg_color=Color.GREY, width=Window.SCROLLABLE_FRAME_WIDTH, height=Window.SCROLLABLE_FRAME_HEIGHT)
+    scrollable_frame.place(x=(Window.WIDTH - Window.SCROLLABLE_FRAME_WIDTH) // 2 - 5, y=Window.BUTTON_HEIGHT * 2 + (Window.BUTTON_PADY * 4) + (Window.FRAME_PADY * 2))
 
 def setup_card_tab(window):
     """
         Build the tab with the buttons to setup / update the card connection
         :param window: Main window of the app
     """
+    # Text size difference
+    diff = 75
 
-    pass
+    # Upload arduino program button
+    card_upload = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
+        width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
+        text=Text.LANGUAGES["eng"]["Card Upload"], font=Window.BUTTON_FONT, command=print("Nop"))
+    card_upload.place(x=Window.WIDTH - (Window.BUTTON_PADX * 3 + Window.BUTTON_WIDTH * 2) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
+
+    # Manual select of the arduino port
+    card_manual_port = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
+        width=Window.BUTTON_WIDTH,  height=Window.BUTTON_HEIGHT, corner_radius=10,
+        text=Text.LANGUAGES["eng"]["Manual Port"], font=Window.BUTTON_FONT, command=print("Nop"))
+    card_manual_port.place(x=Window.WIDTH - (Window.BUTTON_PADX + Window.BUTTON_WIDTH) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
+
+    # Warning message
+    warning_label = ctk.CTkLabel(window, bg_color='transparent', text_color='yellow',
+        width=Window.LABEL_WIDTH,  height=Window.LABEL_HEIGHT, corner_radius=10,
+        text=Text.LANGUAGES["eng"]["Warning"], font=Window.LABEL_FONT)
+    warning_label.place(x=Window.BUTTON_PADX, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.LABEL_PADY))
 
 def build(window):
     """
