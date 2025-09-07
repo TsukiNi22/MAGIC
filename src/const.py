@@ -65,6 +65,11 @@ class Text:
         "Parameter Manager": "Parameter Manager",
         "Script Editor": "Script Editor",
         "Update Card Material": "Update Card Material",
+        "Sort": "Short By",
+        "Sort N": "Number",
+        "Sort Type": "Short By Type",
+        "Sort B/P": "Button / Potentiometer",
+        "Sort P/B": "Potentiometer / Button",
     }
 
     # Language selection

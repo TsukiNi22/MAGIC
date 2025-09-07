@@ -16,6 +16,9 @@ File Name:
 File Description:
 ##  Build of the main window items
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+from tkinter import Widget
+
+from setuptools.windows_support import windows_only
 
 """ Import """
 # Import that can't be in the try
@@ -92,7 +95,17 @@ def setup_peripheral_device_list(window):
         :param window: Main window of the app
     """
 
-    pass
+    # Sort options setup
+    sort_list_var = ctk.StringVar()
+    options = [Text.LANGUAGES["eng"]["Sort"] + " " + Text.LANGUAGES["eng"]["Sort N"],
+                Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort B/P"],
+                Text.LANGUAGES["eng"]["Sort Type"] + " " + Text.LANGUAGES["eng"]["Sort P/B"]]
+    sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color='#222222',button_color='#222222', values=options,
+        width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
+        font=Window.BUTTON_FONT, dynamic_resizing=True, command=print(2), variable=sort_list_var)
+    sort_list.set("三 " + Text.LANGUAGES["eng"]["Sort"] + " ...")
+    sort_list.place(x=75, y=Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2) + (Window.FRAME_PADY * 2))
+
 
 def setup_card_tab(window):
     """
