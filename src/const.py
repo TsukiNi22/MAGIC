@@ -63,6 +63,11 @@ class Window:
     LABEL_PADX = 15 # Padding X of the labels
     LABEL_PADY = 12.5 # Padding Y of the labels
 
+    # Popup
+    POPUP_FONT = ("Arial", 15) # Font used for the popup
+    POPUP_WIDTH = 400 # X size of the popup
+    POPUP_HEIGHT = 175 # Y size of the popup
+
 class Color:
     """
         Different colors
