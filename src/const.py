@@ -33,5 +33,5 @@ class Error:
     ACTION_ERROR = 0b10 # Same~~ as Return.KO, a program action execution won't be able to run after this   (low chance of execution stop)
 
 class Window:
-    WIDTH = 500 # X size of the window
-    HEIGHT = 500 # Y size of the window
+    WIDTH = 1000 # X size of the window
+    HEIGHT = 600 # Y size of the window

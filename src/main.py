@@ -37,6 +37,10 @@ if __name__ != "__main__":
     print("MAGIC can only be executed and not call!")
     exit(Error.FATAL_ERROR)
 
+# Setup the default them & color
+ctk.set_appearance_mode("dark")  # dark | light
+ctk.set_default_color_theme("dark-blue")  # blue | green | dark-blue
+
 # Setup of the main window
 try:
     window = ctk.CTk()
