@@ -20,10 +20,6 @@ File Description:
 ##      - warning
 ##      - error
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-from sysconfig import expand_makefile_vars
-from tkinter import Widget
-
-from setuptools.windows_support import windows_only
 
 """ Import """
 # Import that can't be in the try

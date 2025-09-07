@@ -16,9 +16,6 @@ File Name:
 File Description:
 ##  Build of the main window items
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-from tkinter import Widget
-
-from setuptools.windows_support import windows_only
 
 """ Import """
 # Import that can't be in the try
