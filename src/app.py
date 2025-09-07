@@ -32,10 +32,9 @@ except ImportError as e:
 """ Program """
 def app(window):
     """
-    Call of the setup function & initialisation of the basic things
-
-    :param window: Main window of the app
-    :return: success or error
+        Call of the setup function & initialisation of the basic things
+        :param window: Main window of the app
+        :return: success or error
     """
 
     # Setup of the window

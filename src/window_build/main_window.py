@@ -33,6 +33,11 @@ except ImportError as e:
 
 """ Program """
 def get_actual_monitor():
+    """
+        Get the monitor who contain the mouse
+        :return: Monitor where the mouse is located
+    """
+
     # Get the mouse position
     mouse_x, mouse_y = position()
 
@@ -45,6 +50,11 @@ def get_actual_monitor():
     return get_monitors()[0]
 
 def setup_geometry(window):
+    """
+        Setup the default position and size of the main window
+        :param window: Main window of the app
+    """
+
     # Get the monitor where the mouse is positioned
     monitor = get_actual_monitor()
 
@@ -57,9 +67,8 @@ def setup_geometry(window):
 
 def setup_tab(window):
     """
-    Build the tab with the buttons: Save Parameter, Parameter Manager, Script Editor and Update Card Material
-
-    :param window: Main window of the app
+        Build the tab with the buttons: Save Parameter, Parameter Manager, Script Editor and Update Card Material
+        :param window: Main window of the app
     """
 
     # Tab that will contain the button
@@ -79,28 +88,25 @@ def setup_tab(window):
 
 def setup_peripheral_device_list(window):
     """
-    Build the list used for the peripheral device information display
-
-    :param window: Main window of the app
+        Build the list used for the peripheral device information display
+        :param window: Main window of the app
     """
 
     pass
 
 def setup_card_tab(window):
     """
-    Build the tab with the buttons to setup / update the card connection
-
-    :param window: Main window of the app
+        Build the tab with the buttons to setup / update the card connection
+        :param window: Main window of the app
     """
 
     pass
 
 def build(window):
     """
-    Build the main window items (dispatch to sub functions)
-
-    :param window: Main window of the app
-    :return: success or error
+        Build the main window items (dispatch to sub functions)
+        :param window: Main window of the app
+        :return: success or error
     """
 
     # Setup main window parameters

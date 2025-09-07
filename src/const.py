@@ -19,14 +19,14 @@ File Description:
 
 class Return:
     """
-    Return values
+        Return values
     """
     OK = 0 # Return value upon success on a call function
     KO = 1 # Return value upon fail on a call function
 
 class Error:
     """
-    Error values
+        Error values
     """
     FATAL_ERROR = 0b1000 # Global error, the program whole execution won't be able to run after this        (100% execution stop)
     LOCAL_ERROR = 0b100 # Local error, the program local execution won't probably be able to run after this (some chance of execution stop)
@@ -34,7 +34,7 @@ class Error:
 
 class Window:
     """
-    Window size, color and other thing for the button, frame, window and other
+        Window size, color and other thing for the button, frame, window and other
     """
 
     # Main
@@ -56,7 +56,7 @@ class Window:
 
 class Text:
     """
-    Text in the different language
+        Text in the different languages
     """
 
     # English version
