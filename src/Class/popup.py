@@ -11,7 +11,7 @@ Edition:
 ##  07/09/2025 by Tsukini
 
 File Name:
-##  main_window.py
+##  popup.py
 
 File Description:
 ##  Popup class used to display:
@@ -29,6 +29,7 @@ from sys import exit
 # Import that can be checked
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
+    from window_build.window_geometry import setup_geometry # Used to setup the default size & position
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -52,6 +53,7 @@ class Popup(ctk.CTkToplevel):
         # Setup the main parameter
         self.title(popup_type)
         self.resizable(False, False)
+        setup_geometry(self, Window.POPUP_WIDTH, Window.POPUP_HEIGHT)
 
         # Take the focus
         self.grab_set()
@@ -91,13 +93,8 @@ class Popup(ctk.CTkToplevel):
             button = ctk.CTkButton(buttons_frame, text=button_name, font=Window.POPUP_FONT, command=lambda x=button_name: self._set_result(x))
             button.pack(side="left", padx=Window.BUTTON_PADX, pady=Window.BUTTON_PADY)
 
-        # Setup the default size and position
+        # Setup action
         self.update_idletasks()
-        w, h = self.winfo_width(), self.winfo_height()
-        x = (self.winfo_screenwidth() // 2) - (w // 2)
-        y = (self.winfo_screenheight() // 2) - (h // 2)
-        self.geometry(f"{Window.POPUP_WIDTH}x{Window.POPUP_HEIGHT}+{x}+{y}")
-
         self.protocol("WM_DELETE_WINDOW", self._on_close)
 
         # Wait for the awnser
