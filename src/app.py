@@ -45,6 +45,7 @@ def app(window):
     scrollable_frame = main_window.build(window)
     window.update()
 
+    # Setup the card & loadind calss
     card = Card()
     loading = LoadingOverlay(window, "Serial port connection, Loading")
     loading.start()
@@ -55,7 +56,8 @@ def app(window):
         card.start_serial_port_read()
 
         # Wait~~ for the end of the void setup
-        while not card.end_init:
+        while not card.end_init and card.thread_status == Return.OK:
+            window.update() # Update the loading overlay
             time.sleep(.1)
         loading.stop()
 

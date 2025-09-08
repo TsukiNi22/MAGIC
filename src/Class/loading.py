@@ -25,9 +25,6 @@ from sys import exit
 # Import that can be checked
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
-    import tkinter as tk # Used for the graphics interface / GUI
-    from threading import Thread # Used for the thread
-    from time import sleep # Used to wait between each update of the message
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
