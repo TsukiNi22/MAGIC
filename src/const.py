@@ -95,6 +95,12 @@ class Color:
     RED = "#741010"
     BLUE = "#2F64B4"
 
+class Math:
+    """
+        Different math value used
+    """
+    POTENTIOMETER_CORRECTIF = 3 # Used to have the 0% and the 100%
+
 class Text:
     """
         Text in the different languages
@@ -112,8 +118,8 @@ class Text:
         "Card Upload": "Upload Card Program",
         "Manual Port": "Manual Card Port Selection",
         "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
-        "Potentiometer": "Potentiometer",
-        "Button": "Button",
+        "Potentiometer": "Potentiometer n°",
+        "Button": "Button n°",
         "Parameters": "Parameters",
         "Unknown": "Unknown",
         "Init Port Connection Warning": "The connection to the serial port 'COM3' wasn't succeful, retry with the 'Manual Card Port Selection'!",

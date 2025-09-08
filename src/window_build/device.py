@@ -20,7 +20,7 @@ from tkinter import Widget
 
 """ Import """
 # Import that can't be in the try
-from src.const import Error, Window, Color, Text
+from src.const import Error, Window, Color, Math, Text
 from sys import exit
 
 # Import that can be checked
@@ -31,28 +31,27 @@ except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
 
-def add_device(scrollbar, n, type):
+def add_device(scrollbar, indice, value, type):
     """
         Setup the default position and size of the given window
         :param scrollbar: Parent scrollbar
-        :param n: Index number
+        :param indice: Indice for the Button or Potentiometer
+        :param value: Default value
         :param type: Type can only be 'Potentiometer' or 'Button' else there will be an unknow device
     """
 
     # Setup of the var from the type
     if type == "Button":
-        basic_value = "Low"
-        indice = f" n°{n}"
+        basic_value = ("High" if value == 1 else "Low")
         picture = "data\\img\\button.png"
         picture_size = Window.BUTTON_PICTURE_SIZE
     elif type == "Potentiometer":
-        basic_value = "0%"
-        indice = f" n°A{n}"
+        basic_value = f"{round(((value - Math.POTENTIOMETER_CORRECTIF) * 100) / 1023)}%"
         picture = "data\\img\\potentiometer.png"
         picture_size = Window.POTENTIOMETER_PICTURE_SIZE
     else:
         basic_value = "[None]"
-        indice = f" n°-1"
+        indice = "-1"
         picture = "data\\img\\none.png"
         picture_size = Window.NONE_PICTURE_SIZE
         type = "Unknown"

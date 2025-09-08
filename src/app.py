@@ -46,7 +46,7 @@ def app(window):
     window.update()
 
     # Setup the card & loadind calss
-    card = Card()
+    card = Card(scrollable_frame)
     loading = LoadingOverlay(window, "Serial port connection, Loading")
     loading.start()
 
@@ -61,14 +61,8 @@ def app(window):
             time.sleep(.1)
         loading.stop()
 
-        # Setup the default devices frames
-        if card.thread_status == Return.OK: # If the thread is still alive
-            for key in card.values_memory.keys():
-                if key.__contains__("A"):
-                    device.add_device(scrollable_frame, int(key.split("A")[1]), "Potentiometer")
-                else:
-                    device.add_device(scrollable_frame, int(key), "Button")
-        else:
+        # Check if the thread has encoutered an error
+        if card.thread_status != Return.OK:
             # Error of reading in the thread
             Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Init Port Connection Warning"], ("Ok",))
     else:

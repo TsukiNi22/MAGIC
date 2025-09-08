@@ -16,15 +16,16 @@ File Name:
 File Description:
 ##  Class with method to interact with the arduino card
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-import serial
 
 """ Import """
 # Import that can't be in the try
-from src.const import Error, Return
+from src.const import Error, Return, Math
 from sys import exit
 
 # Import that can be checked
 try:
+    import customtkinter as ctk # Used for the graphics interface / GUI
+    from window_build import device # Build of the window items
     from threading import Thread # to run the reading of the port in a thread
     from serial import Serial, serialutil  # Used to interact with the arduino
 except ImportError as e:
@@ -37,7 +38,7 @@ class Card:
         Class to interact with the arduino card
     """
 
-    def __init__(self):
+    def __init__(self, scrollable_frame):
         """
             Initialisation of the class
         """
@@ -46,6 +47,7 @@ class Card:
         self.running = False # Is the thread running
         self.thread = None # The thread to read the port
         self.thread_status = Return.OK # The thread status
+        self.scrollable_frame = scrollable_frame # Frame parent of the device frames
 
         # Pins data
         self.end_init = False # If the card initialisation is finish
@@ -87,7 +89,36 @@ class Card:
             self.thread.join(timeout=1)
             self.serial_port.close()
 
-    def serial_port_read(self) :
+    def update_value_display(self, indice, value):
+        """
+            Update the value display of the device frames
+        """
+        found = False
+        label = None
+        for frame in self.scrollable_frame.winfo_children():
+            for widget in frame.winfo_children():
+                if not isinstance(widget, ctk.CTkLabel):
+                    continue
+                text = widget.cget("text")
+                if text.__contains__("n°" + indice):
+                    found = True
+                elif text != "":
+                    label = widget
+            if found and label:
+                break
+
+        if found and label:
+            if indice.__contains__("A"):
+                label.configure(text=f"{round(((value - Math.POTENTIOMETER_CORRECTIF) * 100) / 1023)}%")
+            else:
+                label.configure(text=("High" if value == 1 else "Low"))
+        else:
+            if indice.__contains__("A"):
+                device.add_device(self.scrollable_frame, indice, value, "Potentiometer")
+            else:
+                device.add_device(self.scrollable_frame, indice, value, "Button")
+
+    def serial_port_read(self):
         """
             Read the serial port of the card
         """
@@ -106,15 +137,14 @@ class Card:
                         elif self.end_init: # Line of data 'index:value'
                             line_splited = line.split(":")
                             value = int(line_splited[1])
-                            if not line_splited[0].__contains__("A"):
-                                value = (1 if value == 0 else 0)
                             self.values_memory[line_splited[0]] = value
+                            self.update_value_display(line_splited[0], value)
 
                         elif line == "[End Void Setup]": # End of the program setup
                             self.end_init = True
                         # Debug line
-                        #print("Arduino: '" + line + "' -> ", self.values_memory)
-        except serial.SerialException as e:
+                        print("Arduino: '" + line + "' -> ", self.values_memory)
+        except serialutil.SerialException as e:
             print(f"Serial port reading error: {e}")
             self.thread_status = Error.ACTION_ERROR
         finally:
