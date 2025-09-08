@@ -57,6 +57,7 @@ class Window:
     DEVICE_HEIGHT = 250 # Y size of the scrollable devices
     BUTTON_PICTURE_SIZE = (75, 75) # Size of the picture
     POTENTIOMETER_PICTURE_SIZE = (70, 125) # Size of the picture
+    NONE_PICTURE_SIZE = (75, 75) # Size of the picture
 
     # Button
     BUTTON_FONT = ("Arial", 25) # Font used for the buttons
@@ -112,7 +113,9 @@ class Text:
         "Manual Port": "Manual Card Port Selection",
         "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
         "Potentiometer": "Potentiometer",
+        "Button": "Button",
         "Parameters": "Parameters",
+        "Unknown": "Unknown",
     }
 
     # Language selection

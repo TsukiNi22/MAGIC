@@ -24,7 +24,7 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, potentiometer, button # Build of the window items
+    from window_build import main_window, device # Build of the window items
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -41,8 +41,10 @@ def app(window):
     scrollable_frame = main_window.build(window)
 
     for i in range(7):
-        potentiometer.add_potentiometer(scrollable_frame, i)
+        device.add_device(scrollable_frame, i, "Potentiometer")
     for i in range(7):
-        button.add_button(scrollable_frame, i)
+        device.add_device(scrollable_frame, i, "Button")
+    for i in range(7):
+        device.add_device(scrollable_frame, i, "Nothing")
 
     return Return.OK
