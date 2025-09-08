@@ -73,6 +73,8 @@ def setup_peripheral_device_list(window):
     scrollable_frame = ctk.CTkScrollableFrame(window, fg_color=Color.GREY, width=Window.SCROLLABLE_FRAME_WIDTH, height=Window.SCROLLABLE_FRAME_HEIGHT)
     scrollable_frame.place(x=(Window.WIDTH - Window.SCROLLABLE_FRAME_WIDTH) // 2 - 5, y=Window.BUTTON_HEIGHT * 2 + (Window.BUTTON_PADY * 4) + (Window.FRAME_PADY * 2))
 
+    return scrollable_frame
+
 def setup_card_tab(window):
     """
         Build the tab with the buttons to setup / update the card connection
@@ -89,7 +91,7 @@ def setup_card_tab(window):
 
     # Manual select of the arduino port
     card_manual_port = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
-        width=Window.BUTTON_WIDTH,  height=Window.BUTTON_HEIGHT, corner_radius=10,
+        width=Window.LABEL_WIDTH,  height=Window.BUTTON_HEIGHT, corner_radius=10,
         text=Text.LANGUAGES[Text.LANGUAGE]["Manual Port"], font=Window.BUTTON_FONT, command=print("Nop"))
     card_manual_port.place(x=Window.WIDTH - (Window.BUTTON_PADX + Window.BUTTON_WIDTH) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
@@ -97,7 +99,8 @@ def setup_card_tab(window):
     warning_label = ctk.CTkLabel(window, bg_color='transparent', text_color='yellow',
         width=Window.LABEL_WIDTH,  height=Window.LABEL_HEIGHT, corner_radius=10,
         text=Text.LANGUAGES[Text.LANGUAGE]["Warning"], font=Window.LABEL_FONT)
-    warning_label.place(x=Window.BUTTON_PADX, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.LABEL_PADY))
+    # The coef of 1.5 is for the emplacement correction of the multiple line text
+    warning_label.place(x=Window.BUTTON_PADX, y=Window.HEIGHT - (Window.LABEL_HEIGHT * 1.5 + Window.LABEL_PADY))
 
 def build(window):
     """
@@ -114,7 +117,7 @@ def build(window):
 
     # Setup the interface
     setup_tab(window)
-    setup_peripheral_device_list(window)
+    scrollable_frame = setup_peripheral_device_list(window)
     setup_card_tab(window)
 
-    return Return.OK
+    return scrollable_frame

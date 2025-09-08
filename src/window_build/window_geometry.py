@@ -19,7 +19,7 @@ File Description:
 
 """ Import """
 # Import that can't be in the try
-from src.const import Error
+from src.const import Error, Return
 from sys import exit
 
 # Import that can be checked
