@@ -68,12 +68,12 @@ def add_device(scrollbar, n, type):
 
     # Setup of the text
     coef = .9 # To not override the frame corner
-    potentiometer_name = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE][type] + indice, fg_color='transparent',
+    name_label = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE][type] + indice, fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
-    potentiometer_name.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=0)
-    potentiometer_value = ctk.CTkLabel(frame, text_color=Color.WHITE, text=basic_value, fg_color='transparent',
+    name_label.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=0)
+    value_label = ctk.CTkLabel(frame, text_color=Color.WHITE, text=basic_value, fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
-    potentiometer_value.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=Window.LABEL_HEIGHT)
+    value_label.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=Window.LABEL_HEIGHT)
 
     # Setup of the picture
     img = ctk.CTkImage(size=picture_size, light_image=Image.open(picture), dark_image=Image.open(picture))
@@ -87,4 +87,4 @@ def add_device(scrollbar, n, type):
         font=Window.BUTTON_FONT, command=print("Nop"))
     parameters.place(x=Window.BUTTON_PADX, y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
-    return potentiometer_value
+    return value_label
