@@ -11,10 +11,10 @@ Edition:
 ##  08/09/2025 by Tsukini
 
 File Name:
-##  potentiometer.py
+##  button.py
 
 File Description:
-##  Build a potentiometer frame
+##  Build a button frame
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 from tkinter import Widget
 
@@ -31,7 +31,7 @@ except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
 
-def add_potentiometer(scrollbar: ctk.CTkScrollableFrame, n):
+def add_button(scrollbar: ctk.CTkScrollableFrame, n):
     """
         Setup the default position and size of the given window
         :param scrollbar: Parent scrollbar
@@ -50,20 +50,20 @@ def add_potentiometer(scrollbar: ctk.CTkScrollableFrame, n):
 
     # Setup of the text
     coef = .9 # To not override the frame corner
-    potentiometer_name = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE]["Potentiometer"] + f" n°A{index}", fg_color='transparent',
+    button_name = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE]["Potentiometer"] + f" n°A{index}", fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
-    potentiometer_name.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=0)
-    potentiometer_value = ctk.CTkLabel(frame, text_color=Color.WHITE, text="0%", fg_color='transparent',
+    button_name.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=0)
+    button_value = ctk.CTkLabel(frame, text_color=Color.WHITE, text="0%", fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
-    potentiometer_value.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=Window.LABEL_HEIGHT)
+    button_value.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=Window.LABEL_HEIGHT)
 
     # Setup of the picture
-    img = ctk.CTkImage(size=Window.POTENTIOMETER_PICTURE_SIZE,
-        light_image=Image.open("data\\img\\potentiometer.png"),
-        dark_image=Image.open("data\\img\\potentiometer.png"))
+    img = ctk.CTkImage(size=Window.BUTTON_PICTURE_SIZE,
+        light_image=Image.open("data\\img\\button.png"),
+        dark_image=Image.open("data\\img\\button.png"))
     picture = ctk.CTkLabel(frame, image=img, text="", fg_color='transparent')
-    picture.place(x=(Window.DEVICE_WIDTH - Window.POTENTIOMETER_PICTURE_SIZE[0]) // 2,
-        y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY * 2 + Window.POTENTIOMETER_PICTURE_SIZE[1]))
+    picture.place(x=(Window.DEVICE_WIDTH - Window.BUTTON_PICTURE_SIZE[0]) // 2,
+        y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY * 2 + Window.BUTTON_PICTURE_SIZE[1]) * 1.2)
 
     # Setup of the parameter button
     parameters = ctk.CTkButton(frame, fg_color=Color.BLUE, text=Text.LANGUAGES[Text.LANGUAGE]["Parameters"],
@@ -71,4 +71,4 @@ def add_potentiometer(scrollbar: ctk.CTkScrollableFrame, n):
         font=Window.BUTTON_FONT, command=print("Nop"))
     parameters.place(x=Window.BUTTON_PADX, y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
-    return potentiometer_value
+    return button_value

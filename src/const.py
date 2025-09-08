@@ -55,7 +55,7 @@ class Window:
     DEVICE_PADY = 15 # Padding Y of the devices
     DEVICE_WIDTH = (SCROLLABLE_FRAME_WIDTH / NB_DEVICE_LINE) - (DEVICE_PADX * 2) # X size of the scrollable devices
     DEVICE_HEIGHT = 250 # Y size of the scrollable devices
-    BUTTON_PICTURE_SIZE = (70, 125) # Size of the picture
+    BUTTON_PICTURE_SIZE = (75, 75) # Size of the picture
     POTENTIOMETER_PICTURE_SIZE = (70, 125) # Size of the picture
 
     # Button

@@ -8,7 +8,7 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 
 Edition:
-##  07/09/2025 by Tsukini
+##  08/09/2025 by Tsukini
 
 File Name:
 ##  app.py
@@ -24,7 +24,7 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, potentiometer # Build of the window items
+    from window_build import main_window, potentiometer, button # Build of the window items
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -40,7 +40,9 @@ def app(window):
     # Setup of the window
     scrollable_frame = main_window.build(window)
 
-    for i in range(13):
+    for i in range(7):
         potentiometer.add_potentiometer(scrollable_frame, i)
+    for i in range(7):
+        button.add_button(scrollable_frame, i)
 
     return Return.OK
