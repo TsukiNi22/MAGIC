@@ -1,3 +1,4 @@
 customtkinter
 screeninfo
 pyautogui
+pyserial

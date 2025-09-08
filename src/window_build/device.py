@@ -35,7 +35,8 @@ def add_device(scrollbar, n, type):
     """
         Setup the default position and size of the given window
         :param scrollbar: Parent scrollbar
-        :param n: Potentiometer number
+        :param n: Index number
+        :param type: Type can only be 'Potentiometer' or 'Button' else there will be an unknow device
     """
 
     # Setup of the var from the type

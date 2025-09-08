@@ -16,6 +16,7 @@ File Name:
 File Description:
 ##  Call of the main function & setup of the app basic things
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+import time
 
 """ Import """
 # Import that can't be in the try
@@ -24,7 +25,7 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, device # Build of the window items
+    from window_build import main_window # Build of the window items
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -40,11 +41,13 @@ def app(window):
     # Setup of the window
     scrollable_frame = main_window.build(window)
 
-    for i in range(7):
-        device.add_device(scrollable_frame, i, "Potentiometer")
-    for i in range(7):
-        device.add_device(scrollable_frame, i, "Button")
-    for i in range(7):
-        device.add_device(scrollable_frame, i, "Nothing")
+    # Test
+    from Class.card_interaction import Card
+    card = Card()
+    if card.serial_port_open() == Return.OK:
+        card.start_serial_port_read()
+
+    time.sleep(5)
+    print("status:", card.thread_status)
 
     return Return.OK

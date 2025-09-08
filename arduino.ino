@@ -17,6 +17,8 @@ void setup() {
     // Set the communication speed
     Serial.begin(COMMUNICATION_SPEED);
 
+    Serial.print("[Start Void Setup]\n");
+
     // Setup variables
     for (int i = 0; i < NUM_PIN_DIGITAL; real_digital_pins_nb[i] = 0, digital_pins_memory[i] = 0, i++);
     for (int i = 0; i < NUM_PIN_ANALOG; real_analog_pins_nb[i] = 0, analog_pins_memory[i] = 0, i++);
@@ -74,7 +76,7 @@ void setup() {
     }
     Serial.println("\n");
 
-    Serial.print("[Void Setup]\n");
+    Serial.print("[End Void Setup]\n");
 }
 
 void loop()
