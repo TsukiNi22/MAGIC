@@ -41,7 +41,7 @@ def add_device(scrollbar, n, type):
 
     # Setup of the var from the type
     if type == "Button":
-        basic_value = "High"
+        basic_value = "Low"
         indice = f" n°{n}"
         picture = "data\\img\\button.png"
         picture_size = Window.BUTTON_PICTURE_SIZE

@@ -116,6 +116,7 @@ class Text:
         "Button": "Button",
         "Parameters": "Parameters",
         "Unknown": "Unknown",
+        "Init Port Connection Warning": "The connection to the serial port 'COM3' wasn't succeful, retry with the 'Manual Card Port Selection'!",
     }
 
     # Language selection

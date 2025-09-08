@@ -20,12 +20,15 @@ import time
 
 """ Import """
 # Import that can't be in the try
-from const import Return, Error
+from const import Return, Error, Text
 from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window # Build of the window items
+    from window_build import main_window, device # Build of the window items
+    from Class.card_interaction import Card # Used for the card interaction
+    from Class.loading import LoadingOverlay # Used to display the loading frame
+    from Class.popup import Popup # Used to display information
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -38,16 +41,36 @@ def app(window):
         :return: success or error
     """
 
-    # Setup of the window
+    # Setup of the main window
     scrollable_frame = main_window.build(window)
+    window.update()
 
-    # Test
-    from Class.card_interaction import Card
     card = Card()
+    loading = LoadingOverlay(window, "Serial port connection, Loading")
+    loading.start()
+
+    # Try to connect to the port 'COM3'
     if card.serial_port_open() == Return.OK:
+        # Start the reading of the 'COM3'
         card.start_serial_port_read()
 
-    time.sleep(5)
-    print("status:", card.thread_status)
+        # Wait~~ for the end of the void setup
+        while not card.end_init:
+            time.sleep(.1)
+        loading.stop()
+
+        # Setup the default devices frames
+        if card.thread_status == Return.OK: # If the thread is still alive
+            for key in card.values_memory.keys():
+                if key.__contains__("A"):
+                    device.add_device(scrollable_frame, int(key.split("A")[1]), "Potentiometer")
+                else:
+                    device.add_device(scrollable_frame, int(key), "Button")
+        else:
+            # Error of reading in the thread
+            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Init Port Connection Warning"], ("Ok",))
+    else:
+        loading.stop()
+        Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Init Port Connection Warning"], ("Ok",))
 
     return Return.OK

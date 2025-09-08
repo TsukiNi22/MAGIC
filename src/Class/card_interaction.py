@@ -82,10 +82,9 @@ class Card:
         """
             Stop the serial port reading
         """
-        self.running = False
-        if self.thread:
+        if self.running:
+            self.running = False
             self.thread.join(timeout=1)
-        if self.serial_port.is_open:
             self.serial_port.close()
 
     def serial_port_read(self) :
@@ -103,12 +102,18 @@ class Card:
                         if line == "[Start Void Setup]": # Start of the program setup or reset
                             self.end_init = False
                             self.values_memory = {}
+
                         elif self.end_init: # Line of data 'index:value'
                             line_splited = line.split(":")
-                            self.values_memory[line_splited[0]] = int(line_splited[1])
+                            value = int(line_splited[1])
+                            if not line_splited[0].__contains__("A"):
+                                value = (1 if value == 0 else 0)
+                            self.values_memory[line_splited[0]] = value
+
                         elif line == "[End Void Setup]": # End of the program setup
                             self.end_init = True
-                        print("Arduino: '" + line + "' -> ", self.values_memory)
+                        # Debug line
+                        #print("Arduino: '" + line + "' -> ", self.values_memory)
         except serial.SerialException as e:
             print(f"Serial port reading error: {e}")
             self.thread_status = Error.ACTION_ERROR
@@ -120,4 +125,10 @@ class Card:
         """
             Close the port of the card
         """
-        self.serial_port.close()
+        try:
+            if self.serial_port.is_open:
+                self.serial_port.close()
+        except serialutil.SerialException as e:
+            print(f"Serial port connection error: {e}")
+            return Error.ACTION_ERROR
+        return Return.OK
