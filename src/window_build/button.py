@@ -50,10 +50,10 @@ def add_button(scrollbar: ctk.CTkScrollableFrame, n):
 
     # Setup of the text
     coef = .9 # To not override the frame corner
-    button_name = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE]["Potentiometer"] + f" n°A{index}", fg_color='transparent',
+    button_name = ctk.CTkLabel(frame, text_color=Color.WHITE, text=Text.LANGUAGES[Text.LANGUAGE]["Potentiometer"] + f" n°{index}", fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
     button_name.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=0)
-    button_value = ctk.CTkLabel(frame, text_color=Color.WHITE, text="0%", fg_color='transparent',
+    button_value = ctk.CTkLabel(frame, text_color=Color.WHITE, text="Low", fg_color='transparent',
         width=int(Window.DEVICE_WIDTH * coef), height=Window.LABEL_HEIGHT, font=Window.LABEL_FONT)
     button_value.place(x=int(Window.DEVICE_WIDTH * (1 - coef)) // 2, y=Window.LABEL_HEIGHT)
 
