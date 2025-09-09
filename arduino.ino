@@ -17,24 +17,26 @@ void setup() {
     // Set the communication speed
     Serial.begin(COMMUNICATION_SPEED);
 
-    Serial.print("[Start Void Setup]\n");
+    //Serial.print("[Start Void Setup]\n");
 
     // Setup variables
     for (int i = 0; i < NUM_PIN_DIGITAL; real_digital_pins_nb[i] = 0, digital_pins_memory[i] = 0, i++);
     for (int i = 0; i < NUM_PIN_ANALOG; real_analog_pins_nb[i] = 0, analog_pins_memory[i] = 0, i++);
 
     // Analyse of the digital pins
-    Serial.println("Digital pins information:");
+    //Serial.println("Digital pins information:");
     for (int digital_pin = 2; digital_pin - 2 < NUM_PIN_DIGITAL; digital_pin++) {
   	    // Get the pin status
         int pin_status = digitalRead(digital_pin);
 
         // display the pin information
+        /*
         Serial.print(pin_status);
         Serial.print(": ");
         Serial.println(pin_status == HIGH ? "HIGH" : "LOW");
         Serial.print(" - Pin n°");
         Serial.print(digital_pin);
+        */
 
         // Save the HIGH digital pins
         if(pin_status == HIGH)
@@ -42,25 +44,29 @@ void setup() {
     }
 
     // Display the HIGH digital pins found
+    /*
     Serial.print("Digital pins HIGH: ");
     for (int i = 0; i < nb_digital_pins_high; i++) {
         Serial.print(real_digital_pins_nb[i]);
     	if (i + 1 < nb_digital_pins_high) Serial.print(", ");
     }
     Serial.println("\n");
+    */
 
     // Analyse of the analog pins
-    Serial.println("Analog pins information:");
+    //Serial.println("Analog pins information:");
     for (int analog_pin = 0; analog_pin < NUM_PIN_ANALOG; analog_pin++) {
   	    // Get the pin status
         int pin_status = analogRead(analog_pin);
 
         // display the pin information
+        /*
         Serial.print(pin_status);
         Serial.print(" - Pin n°A");
         Serial.print(analog_pin);
         Serial.print(": ");
         Serial.println(pin_status >= 1 ? "HIGH" : "LOW");
+        */
 
         // Save the HIGH analog pins
         if(pin_status >= 1)
@@ -68,6 +74,7 @@ void setup() {
     }
 
     // Display the HIGH digital pins found
+    /*
     Serial.print("Analog pins HIGH: ");
     for (int i = 0; i < nb_analog_pins_high; i++) {
    	    Serial.print("A");
@@ -75,8 +82,9 @@ void setup() {
         if (i + 1 < nb_analog_pins_high) Serial.print(", ");
     }
     Serial.println("\n");
+    */
 
-    Serial.print("[End Void Setup]\n");
+    //Serial.print("[End Void Setup]\n");
 }
 
 void loop()

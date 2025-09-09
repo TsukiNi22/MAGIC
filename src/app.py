@@ -25,10 +25,9 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, device # Build of the window items
+    from window_build import main_window # Build of the window items
+    from event.reset_card import reset_card # Use to initialise/reset the card connection
     from Class.card_interaction import Card # Used for the card interaction
-    from Class.loading import LoadingOverlay # Used to display the loading frame
-    from Class.popup import Popup # Used to display information
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -42,31 +41,20 @@ def app(window):
     """
 
     # Setup of the main window
-    scrollable_frame = main_window.build(window)
+    tab, scrollable_frame, card_upload, card_manual_port = main_window.build(window)
     window.update()
 
     # Setup the card & loadind calss
     card = Card(scrollable_frame)
-    loading = LoadingOverlay(window, "Serial port connection, Loading")
-    loading.start()
+    reset_card(window, scrollable_frame, card)
 
-    # Try to connect to the port 'COM3'
-    if card.serial_port_open() == Return.OK:
-        # Start the reading of the 'COM3'
-        card.start_serial_port_read()
-
-        # Wait~~ for the end of the void setup
-        while not card.end_init and card.thread_status == Return.OK:
-            window.update() # Update the loading overlay
-            time.sleep(.1)
-        loading.stop()
-
-        # Check if the thread has encoutered an error
-        if card.thread_status != Return.OK:
-            # Error of reading in the thread
-            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Init Port Connection Warning"], ("Ok",))
-    else:
-        loading.stop()
-        Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Init Port Connection Warning"], ("Ok",))
+    # Connect the different button to the event
+    functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, scrollable_frame, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
+    buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
+    buttons_function = {}
+    for i in range(len(functions)):
+        buttons_function[buttons_name[i]] = functions[i]
+    for button in tab.winfo_children():
+        button.configure(command=buttons_function[button.cget("text")])
 
     return Return.OK

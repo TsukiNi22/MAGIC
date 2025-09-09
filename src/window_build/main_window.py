@@ -8,7 +8,7 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 
 Edition:
-##  08/09/2025 by Tsukini
+##  09/09/2025 by Tsukini
 
 File Name:
 ##  main_window.py
@@ -42,15 +42,15 @@ def setup_tab(window):
 
     # Build the different button
     button_names = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
-    button_functions = [print("Nop"), print("Nop"), print("Nop"), print("Nop")]
     for i in range(len(button_names)):
-        button = ctk.CTkButton(tab, fg_color=Color.BLUE, text=button_names[i],
-            width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-            font=Window.BUTTON_FONT, command=lambda: button_functions[i])
+        button = ctk.CTkButton(tab, fg_color=Color.BLUE, text=button_names[i], font=Window.BUTTON_FONT,
+            width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10)
         button.grid(column=i, row=0, padx=Window.BUTTON_PADX, pady=Window.BUTTON_PADY)
 
     # Setup the place of the tab
     tab.place(x=(Window.WIDTH - (Window.BUTTON_PADX * len(button_names) * 2) - (Window.BUTTON_WIDTH * 4)) // 2, y=Window.FRAME_PADY)
+
+    return tab
 
 def setup_peripheral_device_list(window):
     """
@@ -102,9 +102,12 @@ def setup_card_tab(window):
     # The coef of 1.5 is for the emplacement correction of the multiple line text
     warning_label.place(x=Window.BUTTON_PADX, y=Window.HEIGHT - (Window.LABEL_HEIGHT * 1.5 + Window.LABEL_PADY))
 
+    return card_upload, card_manual_port
+
 def build(window):
     """
         Build the main window items (dispatch to sub functions)
+        :param window: Main window of the app
         :param window: Main window of the app
         :return: success or error
     """
@@ -116,8 +119,8 @@ def build(window):
     setup_geometry(window, Window.WIDTH, Window.HEIGHT)
 
     # Setup the interface
-    setup_tab(window)
+    tab = setup_tab(window)
     scrollable_frame = setup_peripheral_device_list(window)
-    setup_card_tab(window)
+    card_upload, card_manual_port = setup_card_tab(window)
 
-    return scrollable_frame
+    return tab, scrollable_frame, card_upload, card_manual_port

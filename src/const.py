@@ -38,11 +38,11 @@ class Window:
     """
 
     # Main
-    WIDTH = 1175 # X size of the window
+    WIDTH = 1150 # X size of the window
     HEIGHT = 775 # Y size of the window
 
     # Scrollable Frame
-    SCROLLABLE_FRAME_WIDTH = 1075 # X size of the scrollable frame
+    SCROLLABLE_FRAME_WIDTH = 1050 # X size of the scrollable frame
     SCROLLABLE_FRAME_HEIGHT = 550 # Y size of the scrollable frame
 
     # Frame
@@ -109,7 +109,7 @@ class Text:
 
     # English version
     english = {
-        "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card Material"],
+        "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card"],
         "Sort": "Short By",
         "Sort N": "Number",
         "Sort Type": "Short By Type",
@@ -122,7 +122,7 @@ class Text:
         "Button": "Button n°",
         "Parameters": "Parameters",
         "Unknown": "Unknown",
-        "Init Port Connection Warning": "The connection to the serial port 'COM3' wasn't succeful, retry with the 'Manual Card Port Selection'!",
+        "Default Port Connection Warning": "The connection to the serial port 'COM3' wasn't succeful, retry, if that still doesn't work retry with the 'Manual Card Port Selection'!",
     }
 
     # Language selection

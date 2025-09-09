@@ -28,6 +28,7 @@ try:
     from window_build import device # Build of the window items
     from threading import Thread # to run the reading of the port in a thread
     from serial import Serial, serialutil  # Used to interact with the arduino
+    from tkinter import TclError # Error handling
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -50,7 +51,6 @@ class Card:
         self.scrollable_frame = scrollable_frame # Frame parent of the device frames
 
         # Pins data
-        self.end_init = False # If the card initialisation is finish
         self.values_memory = {} # Store the values {index: value}
 
     def serial_port_open(self):
@@ -58,7 +58,7 @@ class Card:
             Open the serial port of the card
         """
         # Open the serial port
-        self.end_init = False
+        self.values_memory = {}
         try:
             self.serial_port = Serial(
                 port="COM3",  # Default windows port
@@ -107,6 +107,7 @@ class Card:
             if found and label:
                 break
 
+        # Update the text found or create it
         if found and label:
             if indice.__contains__("A"):
                 label.configure(text=f"{round(((value - Math.POTENTIOMETER_CORRECTIF) * 100) / 1023)}%")
@@ -130,35 +131,46 @@ class Card:
 
                     # Dispatch the line
                     if line:
-                        if line == "[Start Void Setup]": # Start of the program setup or reset
-                            self.end_init = False
-                            self.values_memory = {}
-
-                        elif self.end_init: # Line of data 'index:value'
-                            line_splited = line.split(":")
-                            value = int(line_splited[1])
-                            self.values_memory[line_splited[0]] = value
-                            self.update_value_display(line_splited[0], value)
-
-                        elif line == "[End Void Setup]": # End of the program setup
-                            self.end_init = True
                         # Debug line
                         print("Arduino: '" + line + "' -> ", self.values_memory)
+                        line_splited = line.split(":")
+                        value = int(line_splited[1])
+                        self.values_memory[line_splited[0]] = value
+                        self.update_value_display(line_splited[0], value)
+
         except serialutil.SerialException as e:
             print(f"Serial port reading error: {e}")
             self.thread_status = Error.ACTION_ERROR
+
+        except TclError as e:
+            print(f"Update device frame error: {e}")
+            self.thread_status = Error.ACTION_ERROR
+
         finally:
-            if self.serial_port.is_open:
-                self.serial_port.close()
+            self.running = False
+            self.values_memory = {}
+            try:
+                if self.serial_port.is_open:
+                    self.serial_port.close()
+            except Exception as e:
+                pass
 
     def serial_port_close(self):
         """
             Close the port of the card
         """
+        # Try to reset the device frame
+        for frame in self.scrollable_frame.winfo_children():
+            try:
+                frame.destroy()
+            except Exception as e:
+                pass
+
+        # Try to close the port
         try:
             if self.serial_port.is_open:
                 self.serial_port.close()
         except serialutil.SerialException as e:
-            print(f"Serial port connection error: {e}")
+            print(f"Serial port deconnection error: {e}")
             return Error.ACTION_ERROR
         return Return.OK

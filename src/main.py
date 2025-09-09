@@ -16,7 +16,6 @@ File Name:
 File Description:
 ##  Main file of project
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-from tkinter import TclError
 
 """ Import """
 # Import that can't be in the try
@@ -27,6 +26,7 @@ from sys import exit
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from app import app # Main app setup & call of functions
+    from tkinter import TclError # Error handling
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
