@@ -105,6 +105,37 @@ class Math:
     """
     POTENTIOMETER_CORRECTIF = 3 # Used to have the 0% and the 100%
 
+class Board:
+    """
+        Different value used for the card
+    """
+    # Path
+    PROGRAM_FILE = "arduino\\arduino.ino" # Path of the program
+    ARDUINO_CLI = "arduino\\arduino-cli.exe" # Path of the executable used to upload the program
+
+    # List of the board for the arduini-cli
+    BOARDS = {
+        "Arduino Uno": "arduino:avr:uno",
+        "Arduino Nano": "arduino:avr:nano",
+        "Arduino Mega 2560": "arduino:avr:mega",
+        "Arduino Leonardo": "arduino:avr:leonardo",
+        "Arduino Micro": "arduino:avr:micro",
+        "Arduino Mini": "arduino:avr:mini",
+        "Arduino Ethernet": "arduino:avr:ethernet",
+        "Arduino Fio": "arduino:avr:fio",
+        "Arduino BT": "arduino:avr:bt",
+        "Arduino Duemilanove": "arduino:avr:diecimila",
+        "Arduino Pro / Pro Mini": "arduino:avr:pro",
+        "Arduino Yun": "arduino:avr:yun",
+        "Arduino Esplora": "arduino:avr:esplora",
+        "Arduino Zero": "arduino:samd:arduino_zero_native",
+        "Arduino MKR1000": "arduino:samd:mkr1000",
+        "Arduino MKR WiFi 1010": "arduino:samd:mkrwifi1010",
+        "Arduino Nano 33 IoT": "arduino:samd:nano_33_iot",
+        "Arduino Nano 33 BLE": "arduino:mbed:nano33ble",
+        "Arduino Nano 33 BLE Sense": "arduino:mbed:nano33blesense",
+    }
+
 class Text:
     """
         Text in the different languages
@@ -129,7 +160,12 @@ class Text:
         "Unknown": "Unknown",
         "Cancel": "Cancel",
         "Try": "Try",
-        "Port No Device Found Warning": "The connection to the serial port 'PORT' haven't found any peripheral device after 5s, retry on another port with the 'Manual Card Port Selection'",
+        "Upload": "Upload",
+        "Port Connection Loading": "Serial port connection, Loading",
+        "Upload Loading": "Program upload, Loading",
+        "Upload Success": "The program have been successfully uploaded on the card named 'CARD'",
+        "Upload Error": "The upload of the program on the card 'CARD' with the port 'PORT' have failed! Error: INFO",
+        "Port No Device Found Warning": "The connection to the serial port 'PORT' haven't found any peripheral device after 5s, retry on another port with the 'Manual Card Port Selection'!",
         "Default Port Connection Warning": "The connection to the serial port 'PORT' wasn't succeful, retry, if that still doesn't work retry with the 'Manual Card Port Selection'!",
     }
 

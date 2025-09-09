@@ -25,10 +25,9 @@ from sys import exit
 # Import that can be checked
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
-    from tkinter import TclError # Used for the handling
     from serial.tools.list_ports import comports # Obtains the list of the port
     from window_build.window_geometry import setup_geometry # Used to setup the default size & position
-    from event.reset_card import reset_card # Use to initialise/reset the card connection
+    from tool.reset_card import reset_card # Use to initialise/reset the card connection
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -56,7 +55,7 @@ def build(window, scrollable_frame, card):
     options = [port.description for port in comports()]
     port_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        variable=sort_list_var, values=options, dynamic_resizing=True, command=print("Nop"))
+        variable=sort_list_var, values=options, dynamic_resizing=True)
     port_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Manual Port Selection"] + "...")
     port_list.pack(pady=10)
 
@@ -70,9 +69,9 @@ def build(window, scrollable_frame, card):
 
     # Try button
     try_button = ctk.CTkButton(frame, text=Text.LANGUAGES[Text.LANGUAGE]["Try"], font=Window.BUTTON_FONT,
-            command=lambda: (
-                reset_card(window, scrollable_frame, card, port=sort_list_var.get().split("(")[1].split(")")[0]),
-                subwindow.destroy()
-            )
+        command=lambda: (
+            reset_card(window, scrollable_frame, card, port=sort_list_var.get().split("(")[1].split(")")[0]),
+            subwindow.destroy()
+        )
     )
     try_button.pack(side="left", padx=10)

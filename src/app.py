@@ -25,8 +25,8 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, port_selection_window # Build of the window items
-    from event.reset_card import reset_card # Use to initialise/reset the card connection
+    from window_build import main_window, port_selection_window, upload_window # Build of the window items
+    from tool.reset_card import reset_card # Use to initialise/reset the card connection
     from Class.card_interaction import Card # Used for the card interaction
 except ImportError as e:
     print(f"Import Error: {e}")
@@ -48,7 +48,7 @@ def app(window):
     card = Card(scrollable_frame)
     reset_card(window, scrollable_frame, card)
 
-    # Connect the different button to the event
+    # Connect the different button to the tool
     functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, scrollable_frame, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
     buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     buttons_function = {}
@@ -56,6 +56,7 @@ def app(window):
         buttons_function[buttons_name[i]] = functions[i]
     for button in tab.winfo_children():
         button.configure(command=buttons_function[button.cget("text")])
+    card_upload.configure(command=lambda: upload_window.build(window, card))
     card_manual_port.configure(command=lambda: port_selection_window.build(window, scrollable_frame, card))
 
     return Return.OK

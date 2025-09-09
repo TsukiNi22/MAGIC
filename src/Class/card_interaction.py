@@ -8,7 +8,7 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 
 Edition:
-##  08/09/2025 by Tsukini
+##  09/09/2025 by Tsukini
 
 File Name:
 ##  card_interaction.py
@@ -19,16 +19,21 @@ File Description:
 
 """ Import """
 # Import that can't be in the try
-from src.const import Error, Return, Math
+from src.const import Error, Return, Math, Text, Board
 from sys import exit
 
 # Import that can be checked
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from window_build import device # Build of the window items
+    from tool.reset_card import reset_card # Use to initialise/reset the card connection
+    from Class.loading import LoadingOverlay # Used to display the loading frame
+    from Class.popup import Popup # Used to display information
+    from subprocess import run, CalledProcessError # USed to upload the program on the card
     from threading import Thread # to run the reading of the port in a thread
     from serial import Serial, serialutil  # Used to interact with the arduino
     from tkinter import TclError # Error handling
+    from time import sleep # Used to wait
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -42,8 +47,10 @@ class Card:
     def __init__(self, scrollable_frame):
         """
             Initialisation of the class
+            :param scrollable_frame: The scrollable frame used to display the device frames
         """
         # Global var
+        self.port = "COM3" # Port name
         self.serial_port = None # Connection to the port
         self.running = False # Is the thread running
         self.thread = None # The thread to read the port
@@ -56,6 +63,7 @@ class Card:
     def serial_port_open(self, port):
         """
             Open the serial port of the card
+            :param port: Serial port to connect to
         """
         # Open the serial port
         self.values_memory = {}
@@ -65,6 +73,7 @@ class Card:
                 baudrate=38400, # Comunication speed
                 timeout=1  # Timout of the connection
             )
+            self.port = port
         except serialutil.SerialException as e:
             print(f"Serial port connection error: {e}")
             return Error.ACTION_ERROR
@@ -92,6 +101,8 @@ class Card:
     def update_value_display(self, indice, value):
         """
             Update the value display of the device frames
+            :param indice: Index of the device frame
+            :param value: New value of the device frame
         """
         found = False
         label = None
@@ -177,3 +188,43 @@ class Card:
             print(f"Serial port deconnection error: {e}")
             return Error.ACTION_ERROR
         return Return.OK
+
+    def upload_program(self, window, card_name):
+        """
+            Upload the program to the given card
+            :param window: Main program window
+            :param card_name: Name of the card
+        """
+        # Setup the loading overlay
+        loading = LoadingOverlay(window, Text.LANGUAGES[Text.LANGUAGE]["Upload Loading"])
+        loading.start()
+
+        # Close the port if it's open
+        if self.running:
+            self.stop_serial_port_read()
+            # Wait for the end of the ancient port
+            while self.running or self.serial_port.is_open:
+                sleep(.1)
+        self.serial_port_close()
+        window.update()
+
+        # Get the card name for the command
+        fqbn = Board.BOARDS[card_name]
+        try:
+            # Compilation
+            compile_cmd = [Board.ARDUINO_CLI, "compile", "--fqbn", fqbn, Board.PROGRAM_FILE]
+            run(compile_cmd, check=True, capture_output=True, text=True)
+
+            # Upload
+            upload_cmd = [Board.ARDUINO_CLI, "upload", "-p", self.port, "--fqbn", fqbn, Board.PROGRAM_FILE]
+            run(upload_cmd, check=True, capture_output=True, text=True)
+
+            Popup("Information", Text.LANGUAGES[Text.LANGUAGE]["Upload Success"].replace("CARD", card_name), ("Ok",))
+        except CalledProcessError as e:
+            Popup("Error", e.stderr, ("Ok",))
+
+        # Stop the loading overlay
+        loading.stop()
+
+        # Reset the port
+        reset_card(window, self.scrollable_frame, self, port=self.port)
