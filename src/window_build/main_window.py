@@ -66,7 +66,7 @@ def setup_peripheral_device_list(window):
     sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color=Color.DARK_GREY,button_color=Color.DARK_GREY, values=options,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
         font=Window.BUTTON_FONT, dynamic_resizing=True, command=print("Nop"), variable=sort_list_var)
-    sort_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Sort"] + " ...")
+    sort_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Sort"] + "...")
     sort_list.place(x=75, y=Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2) + (Window.FRAME_PADY * 2))
 
     # Setup the list of to handle the peripheral device information display
@@ -107,7 +107,6 @@ def setup_card_tab(window):
 def build(window):
     """
         Build the main window items (dispatch to sub functions)
-        :param window: Main window of the app
         :param window: Main window of the app
         :return: success or error
     """

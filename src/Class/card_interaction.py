@@ -53,7 +53,7 @@ class Card:
         # Pins data
         self.values_memory = {} # Store the values {index: value}
 
-    def serial_port_open(self):
+    def serial_port_open(self, port):
         """
             Open the serial port of the card
         """
@@ -61,7 +61,7 @@ class Card:
         self.values_memory = {}
         try:
             self.serial_port = Serial(
-                port="COM3",  # Default windows port
+                port=port,  # Port value
                 baudrate=38400, # Comunication speed
                 timeout=1  # Timout of the connection
             )
@@ -133,10 +133,13 @@ class Card:
                     if line:
                         # Debug line
                         print("Arduino: '" + line + "' -> ", self.values_memory)
-                        line_splited = line.split(":")
-                        value = int(line_splited[1])
-                        self.values_memory[line_splited[0]] = value
-                        self.update_value_display(line_splited[0], value)
+                        try:
+                            line_splited = line.split(":")
+                            value = int(line_splited[1])
+                            self.values_memory[line_splited[0]] = value
+                            self.update_value_display(line_splited[0], value)
+                        except Exception as e:
+                            print(f"Serial port, line: '{line}', error: {e}")
 
         except serialutil.SerialException as e:
             print(f"Serial port reading error: {e}")

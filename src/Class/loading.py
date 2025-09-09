@@ -33,7 +33,7 @@ except ImportError as e:
 class LoadingOverlay(ctk.CTkFrame):
 
     def __init__(self, parent, message="Loading"):
-        super().__init__(parent, fg_color=Color.DARK, border_color=Color.DARK_GREY, border_width=2, corner_radius=10)
+        super().__init__(parent, fg_color=Color.DARK, border_color=Color.DARK_GREY, border_width=2, corner_radius=25)
         self.place(relx=0.5, rely=0.5, anchor="center")
 
         # Animated label

@@ -25,7 +25,7 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window # Build of the window items
+    from window_build import main_window, port_selection_window # Build of the window items
     from event.reset_card import reset_card # Use to initialise/reset the card connection
     from Class.card_interaction import Card # Used for the card interaction
 except ImportError as e:
@@ -56,5 +56,6 @@ def app(window):
         buttons_function[buttons_name[i]] = functions[i]
     for button in tab.winfo_children():
         button.configure(command=buttons_function[button.cget("text")])
+    card_manual_port.configure(command=lambda: port_selection_window.build(window, scrollable_frame, card))
 
     return Return.OK

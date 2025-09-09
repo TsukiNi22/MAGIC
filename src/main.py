@@ -45,7 +45,7 @@ ctk.set_default_color_theme("dark-blue")  # blue | green | dark-blue
 try:
     window = ctk.CTk()
 except TclError as e:
-    print(f"Tkinter Initialisation Error: {e}")
+    print(f"Tkinter initialisation Error: {e}")
     exit(Error.FATAL_ERROR)
 
 # Call of the main program

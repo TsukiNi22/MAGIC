@@ -49,6 +49,10 @@ class Window:
     FRAME_PADX = 15 # Padding X of the frames
     FRAME_PADY = 15 # Padding Y of the frames
 
+    # SubWindow
+    SUBWINDOW_WIDTH = 325 # X size of the subwindow
+    SUBWINDOW_HEIGHT = 110 # Y size of the subwindow
+
     # Device
     NB_DEVICE_LINE = 5 # Number of device display per line
     DEVICE_PADX = 10 # Padding X of the devices
@@ -117,12 +121,16 @@ class Text:
         "Sort P/B": "Potentiometer / Button",
         "Card Upload": "Upload Card Program",
         "Manual Port": "Manual Card Port Selection",
+        "Manual Port Selection": "Select Port",
         "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
         "Potentiometer": "Potentiometer n°",
         "Button": "Button n°",
         "Parameters": "Parameters",
         "Unknown": "Unknown",
-        "Default Port Connection Warning": "The connection to the serial port 'COM3' wasn't succeful, retry, if that still doesn't work retry with the 'Manual Card Port Selection'!",
+        "Cancel": "Cancel",
+        "Try": "Try",
+        "Port No Device Found Warning": "The connection to the serial port 'PORT' haven't found any peripheral device after 5s, retry on another port with the 'Manual Card Port Selection'",
+        "Default Port Connection Warning": "The connection to the serial port 'PORT' wasn't succeful, retry, if that still doesn't work retry with the 'Manual Card Port Selection'!",
     }
 
     # Language selection

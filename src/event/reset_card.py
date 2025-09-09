@@ -27,13 +27,13 @@ try:
     from window_build import device # Build of the window items
     from Class.loading import LoadingOverlay # Used to display the loading frame
     from Class.popup import Popup # Used to display information
-    from time import sleep # Used to wait
+    from time import sleep, time # Used to wait
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
 
 """ Program """
-def reset_card(window, scrollable_frame, card):
+def reset_card(window, scrollable_frame, card, port="COM3"):
     """
         Reset the card connection & the scrollbar child
         :param window: Main program window
@@ -53,16 +53,23 @@ def reset_card(window, scrollable_frame, card):
             sleep(.1)
         card.serial_port_close()
 
-    # Try to connect to the port 'COM3'
-    if card.serial_port_open() == Return.OK:
-        # Start the reading of the 'COM3'
+    # Try to connect to the port
+    if card.serial_port_open(port) == Return.OK:
+        # Start the reading of the
         card.start_serial_port_read()
+
+        # Wait until at least one device have been found or timeout
+        start = time()
+        timeout = 5
+        while time() - start <= timeout and len(card.values_memory.keys()) == 0:
+            window.update()
+            sleep(.1)
         loading.stop()
 
-        # Check if the thread has encoutered an error
-        if card.thread_status != Return.OK:
-            # Error of reading in the thread
-            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"], ("Ok",))
+        if card.thread_status != Return.OK: # If the thread has encoutered an error
+            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"].replace("PORT", port), ("Ok",))
+        elif time() - start > timeout:
+            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Port No Device Found Warning"].replace("PORT", port), ("Ok",))
     else:
         loading.stop()
-        Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"], ("Ok",))
+        Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"].replace("PORT", port), ("Ok",))
