@@ -41,15 +41,15 @@ def app(window):
     """
 
     # Setup of the main window
-    tab, scrollable_frame, card_upload, card_manual_port = main_window.build(window)
+    tab, scrollable_frame, sort_list, card_upload, card_manual_port = main_window.build(window)
     window.update()
 
     # Setup the card & loadind calss
     card = Card(window, scrollable_frame)
-    reset_card(window, scrollable_frame, card)
+    reset_card(window, sort_list, card)
 
     # Connect the different button to the tool
-    functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, scrollable_frame, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
+    functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
     buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     buttons_function = {}
     for i in range(len(functions)):

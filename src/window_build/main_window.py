@@ -26,6 +26,7 @@ from sys import exit
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from window_build.window_geometry import setup_geometry # Used to setup the default size & position
+    from tool.sort_device import sort_device # Used to sort the device frame
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -65,15 +66,16 @@ def setup_peripheral_device_list(window):
                 Text.LANGUAGES[Text.LANGUAGE]["Sort Type"] + " " + Text.LANGUAGES[Text.LANGUAGE]["Sort P/B"]]
     sort_list = ctk.CTkOptionMenu(window, hover=False, fg_color=Color.DARK_GREY,button_color=Color.DARK_GREY, values=options,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        font=Window.BUTTON_FONT, dynamic_resizing=True, command=print("Nop"), variable=sort_list_var)
+        font=Window.BUTTON_FONT, dynamic_resizing=True, variable=sort_list_var)
     sort_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Sort"] + "...")
     sort_list.place(x=75, y=Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2) + (Window.FRAME_PADY * 2))
 
     # Setup the list of to handle the peripheral device information display
     scrollable_frame = ctk.CTkScrollableFrame(window, fg_color=Color.GREY, width=Window.SCROLLABLE_FRAME_WIDTH, height=Window.SCROLLABLE_FRAME_HEIGHT)
     scrollable_frame.place(x=(Window.WIDTH - Window.SCROLLABLE_FRAME_WIDTH) // 2 - 5, y=Window.BUTTON_HEIGHT * 2 + (Window.BUTTON_PADY * 4) + (Window.FRAME_PADY * 2))
+    sort_list.configure(command=lambda choice: sort_device(window, sort_list, scrollable_frame, choice))
 
-    return scrollable_frame
+    return scrollable_frame, sort_list
 
 def setup_card_tab(window):
     """
@@ -119,7 +121,7 @@ def build(window):
 
     # Setup the interface
     tab = setup_tab(window)
-    scrollable_frame = setup_peripheral_device_list(window)
+    scrollable_frame, sort_list = setup_peripheral_device_list(window)
     card_upload, card_manual_port = setup_card_tab(window)
 
-    return tab, scrollable_frame, card_upload, card_manual_port
+    return tab, scrollable_frame, sort_list, card_upload, card_manual_port

@@ -55,7 +55,7 @@ def build(window, scrollable_frame, card):
     options = [port.description for port in comports()]
     port_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        variable=sort_list_var, values=options, dynamic_resizing=True)
+        variable=sort_list_var, values=options)
     port_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Manual Port Selection"] + "...")
     port_list.pack(pady=10)
 

@@ -58,7 +58,7 @@ def build(window, indice):
     options = [file.name for file in dossier.iterdir() if file.is_file()]
     script_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        variable=script_list_var, values=options, dynamic_resizing=True)
+        variable=script_list_var, values=options)
     value = parameters.get_parameter(indice)
     script_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Selection Script"] + "..." if value is None else value)
     script_list.pack(pady=10)

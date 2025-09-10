@@ -33,11 +33,11 @@ except ImportError as e:
     exit(Error.FATAL_ERROR)
 
 """ Program """
-def reset_card(window, scrollable_frame, card, port="COM3"):
+def reset_card(window, sort_list, card, port="COM3"):
     """
         Reset the card connection & the scrollbar child
         :param window: Main program window
-        :param scrollable_frame: Parent scrollbar
+        :param sort_list: Sort list choice
         :param card: Card interaction class
     """
 
@@ -52,6 +52,9 @@ def reset_card(window, scrollable_frame, card, port="COM3"):
         while card.running or card.serial_port.is_open:
             sleep(.1)
         card.serial_port_close()
+
+    # Reset the sort device choice
+    sort_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Sort"] + "...")
 
     # Try to connect to the port
     if card.serial_port_open(port) == Return.OK:
