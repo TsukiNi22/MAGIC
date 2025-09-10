@@ -144,6 +144,7 @@ class Text:
 
     # English version
     english = {
+        # Button/Label text
         "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card"],
         "Sort": "Short By",
         "Sort N": "Number",
@@ -158,15 +159,56 @@ class Text:
         "Button": "Button n°",
         "Parameters": "Parameters",
         "Unknown": "Unknown",
+
+        # Popup button text
         "Cancel": "Cancel",
         "Try": "Try",
         "Upload": "Upload",
+
+        # Loading overlay message
         "Port Connection Loading": "Serial port connection, Loading",
         "Upload Loading": "Program upload, Loading",
+
+        # Popup message
         "Upload Success": "The program have been successfully uploaded on the card named 'CARD'",
         "Upload Error": "The upload of the program on the card 'CARD' with the port 'PORT' have failed! Error: INFO",
         "Port No Device Found Warning": "The connection to the serial port 'PORT' haven't found any peripheral device after 5s, retry on another port with the 'Manual Card Port Selection'!",
         "Default Port Connection Warning": "The connection to the serial port 'PORT' wasn't succeful, retry, if that still doesn't work retry with the 'Manual Card Port Selection'!",
+
+        # Instructions:
+        #   - STRING -> Textbox with any string
+        #   - INT -> Textbox that only accept int
+        #   - UINT -> Textbox that only accept int above 0
+        #   - PERCENTAGE -> Textbox that only accept int from 0 to 100
+        #   - PATH -> Button to choice a file
+        #   - LIST -> list of choice
+        #   - KEY -> Button that take the next key press
+        # Script text, cut on the ':'
+        #---------------  Action  ---------------
+        "Move To": "Move to:INT:x:INT:y",
+        "Move of To": "Move of:INT:to:LIST",
+        "Set Sound": "Set sound to:PERCENTAGE:%",
+        "Set Sound Percentage": "Set sound to potentiometer percentage",
+        "Write": "Write:STRING",
+        "Open Link": "Open:STRING",
+        "Execute": "Execute:PATH",
+        #--------------- Keyboard ---------------
+        "Press Key": "Press:KEY",
+        "Press Key For": "Press:KEY:for:UINT:ms",
+        "Key D/U": "KEY:LIST",
+        "Click": "LIST:Click",
+        "Double Click": "Double:LIST:Click",
+        "Click D/U": "Click:LIST",
+        "Click At": "LIST:Click at:INT:x:INT:y",
+        #---------------  Others  ---------------
+        "Popup": "Popup:STRING",
+        "Wait": "Wait:UINT:ms",
+        "Invert Value": "Invert potentiometer value",
+        #--------------- Advenced ---------------
+        "Label": "Label:STRING",
+        "GoTo": "Goto label:STRING",
+        "For": "For:UINT:time",
+        "End For": "End For",
     }
 
     # Language selection
