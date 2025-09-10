@@ -44,9 +44,10 @@ class Card:
         Class to interact with the arduino card
     """
 
-    def __init__(self, scrollable_frame):
+    def __init__(self, window, scrollable_frame):
         """
             Initialisation of the class
+            :param window: Main program window
             :param scrollable_frame: The scrollable frame used to display the device frames
         """
         # Global var
@@ -55,6 +56,7 @@ class Card:
         self.running = False # Is the thread running
         self.thread = None # The thread to read the port
         self.thread_status = Return.OK # The thread status
+        self.window = window # Main window
         self.scrollable_frame = scrollable_frame # Frame parent of the device frames
 
         # Pins data
@@ -126,9 +128,9 @@ class Card:
                 label.configure(text=("High" if value == 1 else "Low"))
         else:
             if indice.__contains__("A"):
-                device.add_device(self.scrollable_frame, indice, value, "Potentiometer")
+                device.add_device(self.window, self.scrollable_frame, indice, value, "Potentiometer")
             else:
-                device.add_device(self.scrollable_frame, indice, value, "Button")
+                device.add_device(self.window, self.scrollable_frame, indice, value, "Button")
 
     def serial_port_read(self):
         """

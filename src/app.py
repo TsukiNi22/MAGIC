@@ -45,7 +45,7 @@ def app(window):
     window.update()
 
     # Setup the card & loadind calss
-    card = Card(scrollable_frame)
+    card = Card(window, scrollable_frame)
     reset_card(window, scrollable_frame, card)
 
     # Connect the different button to the tool

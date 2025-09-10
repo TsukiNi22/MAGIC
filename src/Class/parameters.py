@@ -30,7 +30,7 @@ except ImportError as e:
     exit(Error.FATAL_ERROR)
 
 """ Class """
-class Popup():
+class Parameters:
     """
         Class to handle the parameters edition/reading
     """
@@ -70,7 +70,7 @@ class Popup():
                 return line_splited[1]
         return None
 
-    def edit_parameter(self, name, value):
+    def set_parameter(self, name, value):
         """
             Change the value of a parameter
         """
@@ -82,5 +82,5 @@ class Popup():
                 found = True
                 break
         if not found:
-            self.lignes.append(f"{name}={value}")
+            self.lignes.append(f"\n{name}={value}")
         self.save_parameters()

@@ -16,7 +16,6 @@ File Name:
 File Description:
 ##  Build a potentiometer frame
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-from tkinter import Widget
 
 """ Import """
 # Import that can't be in the try
@@ -27,11 +26,12 @@ from sys import exit
 try:
     import customtkinter as ctk  # Used for the graphics interface / GUI
     from PIL import Image # Used to load the pictures
+    from window_build import script_selection_window # Build of the window items
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
 
-def add_device(scrollbar, indice, value, type):
+def add_device(window, scrollbar, indice, value, type):
     """
         Setup the default position and size of the given window
         :param scrollbar: Parent scrollbar
@@ -82,9 +82,10 @@ def add_device(scrollbar, indice, value, type):
         y=(Window.LABEL_HEIGHT * 2) + ((Window.DEVICE_HEIGHT - ((Window.LABEL_HEIGHT * 2) + Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2))) // 2) - (picture_size[1] // 2))
 
     # Setup of the parameter button
-    parameters = ctk.CTkButton(frame, fg_color=Color.BLUE, text=Text.LANGUAGES[Text.LANGUAGE]["Parameters"],
-        width=Window.DEVICE_WIDTH - (Window.BUTTON_PADX * 2), height=Window.BUTTON_HEIGHT, corner_radius=10,
-        font=Window.BUTTON_FONT, command=print("Nop"))
+    parameters = ctk.CTkButton(frame, fg_color=Color.BLUE, text=Text.LANGUAGES[Text.LANGUAGE]["Parameters"], font=Window.BUTTON_FONT,
+        width=Window.DEVICE_WIDTH - (Window.BUTTON_PADX * 2), height=Window.BUTTON_HEIGHT, corner_radius=10)
     parameters.place(x=Window.BUTTON_PADX, y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
+    if type != "Unknown":
+       parameters.configure(command=lambda: script_selection_window.build(window, indice))
 
     return value_label
