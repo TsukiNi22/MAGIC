@@ -17,6 +17,7 @@ File Description:
 ##  Constants of the project
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""" Const """
 class Return:
     """
         Return values
@@ -140,7 +141,20 @@ class Text:
     """
         Text in the different languages
     """
-    LANGUAGE = "eng" # Language used
+    # Setup the used language
+    LANGUAGE = "eng" # Default language used
+    AUTHORIZED_LANGUAGES = ["eng"] # Languages authorized
+
+    # Get the parameters
+    with open("data\\parameters.save", "r", encoding="utf-8") as file:
+        lignes = file.readlines()
+
+    # Get the language in the readed lines
+    for line in lignes:
+        line_splited = line.split("=")
+        if line_splited[0] == "language" and AUTHORIZED_LANGUAGES.__contains__(line_splited[1]):
+            LANGUAGE = line_splited[1]
+            break
 
     # English version
     english = {
@@ -154,6 +168,8 @@ class Text:
         "Card Upload": "Upload Card Program",
         "Manual Port": "Manual Card Port Selection",
         "Manual Port Selection": "Select Port",
+        "Script Selection": "Script Selection",
+        "Selection Script": "Select Script",
         "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
         "Potentiometer": "Potentiometer n°",
         "Button": "Button n°",
@@ -163,6 +179,7 @@ class Text:
         # Popup button text
         "Cancel": "Cancel",
         "Try": "Try",
+        "Save": "Save",
         "Upload": "Upload",
 
         # Loading overlay message
