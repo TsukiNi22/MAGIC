@@ -27,6 +27,7 @@ from sys import exit
 try:
     from window_build import main_window, port_selection_window, upload_window # Build of the window items
     from tool.reset_card import reset_card # Use to initialise/reset the card connection
+    from tool.video_display import video_display # Used to display video
     from Class.card_interaction import Card # Used for the card interaction
 except ImportError as e:
     print(f"Import Error: {e}")
@@ -42,9 +43,12 @@ def app(window):
 
     # Setup of the main window
     tab, scrollable_frame, sort_list, card_upload, card_manual_port = main_window.build(window)
-    window.update()
 
-    # Setup the card & loadind calss
+    # Display the loading screen
+    window.update()
+    video_display(window, "data\\video\\loading_animation.mp4")
+
+    # Setup the card & loadind class
     card = Card(window, scrollable_frame)
     reset_card(window, sort_list, card)
 

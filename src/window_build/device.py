@@ -82,7 +82,7 @@ def add_device(window, scrollbar, indice, value, type):
         y=(Window.LABEL_HEIGHT * 2) + ((Window.DEVICE_HEIGHT - ((Window.LABEL_HEIGHT * 2) + Window.BUTTON_HEIGHT + (Window.BUTTON_PADY * 2))) // 2) - (picture_size[1] // 2))
 
     # Setup of the parameter button
-    parameters = ctk.CTkButton(frame, fg_color=Color.BLUE, text=Text.LANGUAGES[Text.LANGUAGE]["Parameters"], font=Window.BUTTON_FONT,
+    parameters = ctk.CTkButton(frame, fg_color=Color.BLUE, text=Text.LANGUAGES[Text.LANGUAGE]["Parameter"], font=Window.BUTTON_FONT,
         width=Window.DEVICE_WIDTH - (Window.BUTTON_PADX * 2), height=Window.BUTTON_HEIGHT, corner_radius=10)
     parameters.place(x=Window.BUTTON_PADX, y=Window.DEVICE_HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
     if type != "Unknown":

@@ -159,7 +159,7 @@ class Text:
     # English version
     english = {
         # Button/Label text
-        "Tab Buttons": ["Save Parameter", "Parameter Manager", "Script Editor", "Update Card"],
+        "Tab Buttons": ["Config Manager", "Script Editor", "Settings", "Update Card"],
         "Sort": "Short By",
         "Sort N": "Number",
         "Sort Type": "Short By Type",
@@ -173,7 +173,7 @@ class Text:
         "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
         "Potentiometer": "Potentiometer n°",
         "Button": "Button n°",
-        "Parameters": "Parameters",
+        "Parameter": "Parameter",
         "Unknown": "Unknown",
 
         # Popup button text

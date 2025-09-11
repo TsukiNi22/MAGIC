@@ -2,3 +2,5 @@ customtkinter
 screeninfo
 pyautogui
 pyserial
+av==10.0.0
+tkVideoPlayer
