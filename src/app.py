@@ -50,7 +50,7 @@ def app(window):
 
     # Setup the card & loadind class
     card = Card(window, scrollable_frame)
-    reset_card(window, sort_list, card)
+    reset_card(window, sort_list, card, video=True)
 
     # Connect the different button to the tool
     functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card

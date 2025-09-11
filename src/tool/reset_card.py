@@ -33,17 +33,20 @@ except ImportError as e:
     exit(Error.FATAL_ERROR)
 
 """ Program """
-def reset_card(window, sort_list, card, port="COM3"):
+def reset_card(window, sort_list, card, port="COM3", video=False):
     """
         Reset the card connection & the scrollbar child
         :param window: Main program window
         :param sort_list: Sort list choice
         :param card: Card interaction class
+        :param port: Port of the card to connect
+        :param video: If a video is running in parralel
     """
 
     # Init the loading overlay
-    loading = LoadingOverlay(window, Text.LANGUAGES[Text.LANGUAGE]["Port Connection Loading"])
-    loading.start()
+    if not video:
+        loading = LoadingOverlay(window, Text.LANGUAGES[Text.LANGUAGE]["Port Connection Loading"])
+        loading.start()
 
     # If the card is already connected, disconnect it
     if card.running:
@@ -67,12 +70,13 @@ def reset_card(window, sort_list, card, port="COM3"):
         while time() - start <= timeout and len(card.values_memory.keys()) == 0:
             window.update()
             sleep(.1)
-        loading.stop()
 
-        if card.thread_status != Return.OK: # If the thread has encoutered an error
-            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"].replace("PORT", port), ("Ok",))
-        elif time() - start > timeout:
-            Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Port No Device Found Warning"].replace("PORT", port), ("Ok",))
-    else:
+        if not video:
+            loading.stop()
+            if card.thread_status != Return.OK: # If the thread has encoutered an error
+                Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"].replace("PORT", port), ("Ok",))
+            elif time() - start > timeout:
+                Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Port No Device Found Warning"].replace("PORT", port), ("Ok",))
+    elif not video:
         loading.stop()
         Popup("Warning", Text.LANGUAGES[Text.LANGUAGE]["Default Port Connection Warning"].replace("PORT", port), ("Ok",))

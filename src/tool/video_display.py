@@ -26,24 +26,24 @@ from sys import exit
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from tkVideoPlayer import TkinterVideo # Used to display video
+    from time import sleep # Used to wait
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
 
 """ Program """
-def video_display(parent, video_path):
+def video_display(parent, video_path, ):
     """
         Display a video in a frame
         :param parent: Parent window where the video will be displayed
         :param video_path: Path to the video file
     """
-
     # Create the frame that take the whole parent
     video_frame = ctk.CTkFrame(parent, bg_color="transparent", fg_color="transparent")
     video_frame.pack(fill="both", expand=True)
 
     # Create the video
-    videoplayer = TkinterVideo(master=video_frame, scaled=True, background=Color.DARK_GREY)
+    videoplayer = TkinterVideo(master=video_frame, scaled=True, background="#202020")
     videoplayer.load(video_path)
     videoplayer.pack(expand=True, fill="both")
 
@@ -54,3 +54,5 @@ def video_display(parent, video_path):
 
     # Start the video
     videoplayer.play()
+
+    return video_frame
