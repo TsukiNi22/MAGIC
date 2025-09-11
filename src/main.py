@@ -20,7 +20,11 @@ File Description:
 """ Import """
 # Import that can't be in the try
 from const import Return, Error
-from sys import exit
+from sys import exit, executable
+from subprocess import check_call
+
+# Install dependencies
+check_call([executable, "-m", "pip", "install", "-r", "requirements.txt"])
 
 # Import that can be checked
 try:
