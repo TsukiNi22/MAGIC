@@ -16,6 +16,7 @@ File Name:
 File Description:
 ##  Build of the device script selection window items
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+from src.Class.popup import Popup
 
 """ Import """
 # Import that can't be in the try
@@ -27,6 +28,7 @@ try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from window_build.window_geometry import setup_geometry # Used to setup the default size & position
     from Class.parameters import Parameters # Used to read the parameters
+    from Class.popup import Popup # Used to display information
     from pathlib import Path # Used to get the list of the script
 except ImportError as e:
     print(f"Import Error: {e}")
@@ -55,12 +57,13 @@ def build(window, indice):
     # Sort options setup
     script_list_var = ctk.StringVar()
     dossier = (Path("data\\scripts\\potentiometer") if indice.__contains__("A") else Path("data\\scripts\\button"))
-    options = [file.name for file in dossier.iterdir() if file.is_file()]
+    options = ["[None]"] + [file.name for file in dossier.iterdir() if file.is_file()]
     script_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
         variable=script_list_var, values=options)
     value = parameters.get_parameter(indice)
-    script_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Selection Script"] + "..." if value is None else value)
+    default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Script"] + "..."
+    script_list.set(default_text if value is None else value)
     script_list.pack(pady=10)
 
     # Frame for the buttons
@@ -76,6 +79,6 @@ def build(window, indice):
         command=lambda: (
             parameters.set_parameter(indice, script_list_var.get()),
             subwindow.destroy()
-        )
+        ) if default_text != script_list_var.get() else Popup("Error", Text.LANGUAGES[Text.LANGUAGE]["Nothing Seleted"].replace("WHAT", Text.LANGUAGES[Text.LANGUAGE]["script"]), ("Ok",))
     )
     try_button.pack(side="left", padx=10)

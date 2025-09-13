@@ -163,25 +163,41 @@ class Text:
 
     # English version
     english = {
-        # Button/Label text
+        # Global text
+        "Unknown": "Unknown",
+        "Enabled": "Enabled",
+        "Disabled": "Disabled",
+        "card": "card",
+        "script": "script",
+        "port": "port",
+
+        # Main window Button/Label text
         "Tab Buttons": ["Config Manager", "Script Editor", "Settings", "Update Card"],
+        "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
+
+        # Littel subwindow from the main window (Upload program, Manual port, Device parameter)
+        "Card Upload": "Upload Card Program",
+        "Select Card": "Select Card",
+        "Upload": "Upload",
+        "Manual Port": "Manual Card Port Selection",
+        "Select Port": "Select Port",
+        "Try": "Try",
+        "Script Selection": "Script Selection",
+        "Select Script": "Select Script",
+        "Save": "Save",
+        "Cancel": "Cancel",
+
+        # Device text
+        "Button": "Button n°",
+        "Potentiometer": "Potentiometer n°",
+        "Parameter": "Parameter",
+
+        # Sort type
         "Sort": "Short By",
         "Sort N": "Number",
         "Sort Type": "Short By Type",
         "Sort B/P": "Button / Potentiometer",
         "Sort P/B": "Potentiometer / Button",
-        "Card Upload": "Upload Card Program",
-        "Manual Port": "Manual Card Port Selection",
-        "Manual Port Selection": "Select Port",
-        "Script Selection": "Script Selection",
-        "Selection Script": "Select Script",
-        "Warning": "If something don\'t work there some chance that\nyour port is already connected to another thing",
-        "Potentiometer": "Potentiometer n°",
-        "Button": "Button n°",
-        "Parameter": "Parameter",
-        "Unknown": "Unknown",
-        "Enabled": "Enabled",
-        "Disabled": "Disabled",
 
         # Settings
         "Settings": "Settings",
@@ -189,17 +205,12 @@ class Text:
         "Loading Screen": "Loading Screen",
         "Configuration": "Configuration",
 
-        # Popup button text
-        "Cancel": "Cancel",
-        "Try": "Try",
-        "Save": "Save",
-        "Upload": "Upload",
-
         # Loading overlay message
         "Port Connection Loading": "Serial port connection, Loading",
         "Upload Loading": "Program upload, Loading",
 
         # Popup message
+        "Nothing Seleted": "You haven't seleted any WHAT, please select a WHAT or cancel your action!",
         "Upload Success": "The program have been successfully uploaded on the card named 'CARD'",
         "Upload Error": "The upload of the program on the card 'CARD' with the port 'PORT' have failed! Error: INFO",
         "Port No Device Found Warning": "The connection to the serial port 'PORT' haven't found any peripheral device after 5s, retry on another port with the 'Manual Card Port Selection'!",

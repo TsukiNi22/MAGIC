@@ -88,13 +88,13 @@ def setup_card_tab(window):
     # Upload arduino program button
     card_upload = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        text=Text.LANGUAGES[Text.LANGUAGE]["Card Upload"], font=Window.BUTTON_FONT, command=print("Nop"))
+        text=Text.LANGUAGES[Text.LANGUAGE]["Card Upload"], font=Window.BUTTON_FONT)
     card_upload.place(x=Window.WIDTH - (Window.BUTTON_PADX * 3 + Window.BUTTON_WIDTH * 2) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
     # Manual select of the arduino port
     card_manual_port = ctk.CTkButton(window, fg_color=Color.RED, hover_color=Color.DARK_RED, border_color='black', border_width=2,
         width=Window.LABEL_WIDTH,  height=Window.BUTTON_HEIGHT, corner_radius=10,
-        text=Text.LANGUAGES[Text.LANGUAGE]["Manual Port"], font=Window.BUTTON_FONT, command=print("Nop"))
+        text=Text.LANGUAGES[Text.LANGUAGE]["Manual Port"], font=Window.BUTTON_FONT)
     card_manual_port.place(x=Window.WIDTH - (Window.BUTTON_PADX + Window.BUTTON_WIDTH) - diff, y=Window.HEIGHT - (Window.BUTTON_HEIGHT + Window.BUTTON_PADY))
 
     # Warning message

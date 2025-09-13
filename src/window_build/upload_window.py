@@ -26,6 +26,7 @@ from sys import exit
 try:
     import customtkinter as ctk # Used for the graphics interface / GUI
     from window_build.window_geometry import setup_geometry # Used to setup the default size & position
+    from Class.popup import Popup # Used to display information
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -48,12 +49,13 @@ def build(window, card):
     subwindow.grab_set()
 
     # Sort options setup
-    sort_list_var = ctk.StringVar()
+    card_list_var = ctk.StringVar()
     options = list(Board.BOARDS.keys())
     port_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        variable=sort_list_var, values=options, dynamic_resizing=True)
-    port_list.set(list(Board.BOARDS.keys())[0])
+        variable=card_list_var, values=options, dynamic_resizing=True)
+    default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Card"] + "..."
+    port_list.set(default_text)
     port_list.pack(pady=10)
 
     # Frame for the buttons
@@ -66,5 +68,9 @@ def build(window, card):
 
     # Try button
     try_button = ctk.CTkButton(frame, text=Text.LANGUAGES[Text.LANGUAGE]["Upload"], font=Window.BUTTON_FONT,
-        command=lambda: (card.upload_program(window, sort_list_var.get()), subwindow.destroy()))
+        command=lambda: (
+            card.upload_program(window, card_list_var.get()),
+            subwindow.destroy()
+        ) if default_text != card_list_var.get() else Popup("Error", Text.LANGUAGES[Text.LANGUAGE]["Nothing Seleted"].replace("WHAT", Text.LANGUAGES[Text.LANGUAGE]["card"]), ("Ok",))
+    )
     try_button.pack(side="left", padx=10)

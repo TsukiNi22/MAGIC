@@ -28,6 +28,7 @@ try:
     from serial.tools.list_ports import comports # Obtains the list of the port
     from window_build.window_geometry import setup_geometry # Used to setup the default size & position
     from tool.reset_card import reset_card # Use to initialise/reset the card connection
+    from Class.popup import Popup # Used to display information
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -51,12 +52,13 @@ def build(window, scrollable_frame, card):
     subwindow.grab_set()
 
     # Sort options setup
-    sort_list_var = ctk.StringVar()
+    port_list_var = ctk.StringVar()
     options = [port.description for port in comports()]
     port_list = ctk.CTkOptionMenu(subwindow, hover=False, fg_color=Color.DARK_GREY, button_color=Color.DARK_GREY, font=Window.POPUP_FONT,
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
-        variable=sort_list_var, values=options)
-    port_list.set("三 " + Text.LANGUAGES[Text.LANGUAGE]["Manual Port Selection"] + "...")
+        variable=port_list_var, values=options)
+    default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Port"] + "..."
+    port_list.set(default_text)
     port_list.pack(pady=10)
 
     # Frame for the buttons
@@ -70,8 +72,8 @@ def build(window, scrollable_frame, card):
     # Try button
     try_button = ctk.CTkButton(frame, text=Text.LANGUAGES[Text.LANGUAGE]["Try"], font=Window.BUTTON_FONT,
         command=lambda: (
-            reset_card(window, scrollable_frame, card, port=sort_list_var.get().split("(")[1].split(")")[0]),
+            reset_card(window, scrollable_frame, card, port=port_list_var.get().split("(")[1].split(")")[0]),
             subwindow.destroy()
-        )
+        ) if default_text != port_list_var.get() else Popup("Error", Text.LANGUAGES[Text.LANGUAGE]["Nothing Seleted"].replace("WHAT", Text.LANGUAGES[Text.LANGUAGE]["port"]), ("Ok",))
     )
     try_button.pack(side="left", padx=10)

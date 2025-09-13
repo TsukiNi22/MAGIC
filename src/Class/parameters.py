@@ -74,6 +74,12 @@ class Parameters:
         """
             Change the value of a parameter
         """
+        # Special case where a parameter is empty and need to be removed
+        if value == "[None]":
+            self.del_parameter(name)
+            return
+
+        # Normal use to set a parameter value
         self.get_parameters()
         found = False
         for i in range(len(self.lignes)):
@@ -82,5 +88,16 @@ class Parameters:
                 found = True
                 break
         if not found:
-            self.lignes.append(f"\n{name}={value}")
+            self.lignes.append(f"{name}={value}\n")
+        self.save_parameters()
+
+    def del_parameter(self, name):
+        """
+            Delete a parameter
+        """
+        self.get_parameters()
+        for i in range(len(self.lignes)):
+            if self.lignes[i].split("=")[0] == name:
+                self.lignes.remove(self.lignes[i])
+                break
         self.save_parameters()
