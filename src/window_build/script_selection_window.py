@@ -63,7 +63,7 @@ def build(window, indice):
         variable=script_list_var, values=options)
     value = parameters.get_parameter(indice)
     default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Script"] + "..."
-    script_list.set(default_text if value is None else value)
+    script_list_var.set(default_text if value is None else value)
     script_list.pack(pady=10)
 
     # Frame for the buttons

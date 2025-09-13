@@ -58,7 +58,7 @@ def build(window, scrollable_frame, card):
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
         variable=port_list_var, values=options)
     default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Port"] + "..."
-    port_list.set(default_text)
+    port_list_var.set(default_text)
     port_list.pack(pady=10)
 
     # Frame for the buttons

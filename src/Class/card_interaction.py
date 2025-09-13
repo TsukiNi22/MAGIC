@@ -44,11 +44,12 @@ class Card:
         Class to interact with the arduino card
     """
 
-    def __init__(self, window, scrollable_frame):
+    def __init__(self, window, scrollable_frame, sort_list_var):
         """
             Initialisation of the class
             :param window: Main program window
             :param scrollable_frame: The scrollable frame used to display the device frames
+            :param sort_list_var: Var of the sort list choice
         """
         # Global var
         self.port = "COM3" # Port name
@@ -58,6 +59,7 @@ class Card:
         self.thread_status = Return.OK # The thread status
         self.window = window # Main window
         self.scrollable_frame = scrollable_frame # Frame parent of the device frames
+        self.sort_list_var = sort_list_var # Var of the sort list choice
 
         # Pins data
         self.values_memory = {} # Store the values {index: value}
@@ -145,7 +147,7 @@ class Card:
                     # Dispatch the line
                     if line:
                         # Debug line
-                        print("Arduino: '" + line + "' -> ", self.values_memory)
+                        #print("Arduino: '" + line + "' -> ", self.values_memory)
                         try:
                             line_splited = line.split(":")
                             value = int(line_splited[1])
@@ -229,4 +231,4 @@ class Card:
         loading.stop()
 
         # Reset the port
-        reset_card(window, self.scrollable_frame, self, port=self.port)
+        reset_card(window, self.sort_list_var, self, port=self.port)

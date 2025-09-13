@@ -55,7 +55,7 @@ def build(window, card):
         width=Window.BUTTON_WIDTH, height=Window.BUTTON_HEIGHT, corner_radius=10,
         variable=card_list_var, values=options, dynamic_resizing=True)
     default_text = "三 " + Text.LANGUAGES[Text.LANGUAGE]["Select Card"] + "..."
-    port_list.set(default_text)
+    card_list_var.set(default_text)
     port_list.pack(pady=10)
 
     # Frame for the buttons

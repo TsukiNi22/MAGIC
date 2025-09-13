@@ -43,21 +43,21 @@ def app(window):
     """
 
     # Setup of the main window
-    tab, scrollable_frame, sort_list, card_upload, card_manual_port = main_window.build(window)
+    tab, scrollable_frame, sort_list_var, card_upload, card_manual_port = main_window.build(window)
 
     # Setup the card
-    card = Card(window, scrollable_frame)
+    card = Card(window, scrollable_frame, sort_list_var)
 
     # Display the loading screen if activated else just setup card
     window.update()
     loading = Parameters().get_parameter("loading")
     if loading is not None and loading == "1":
-        video_display(window, "data\\video\\loading-animation_resized.mp4", card=[window, sort_list, card]) # resized version: 1920x1080 -> 1603x1080
+        video_display(window, "data\\video\\loading-animation_resized.mp4", card=[window, sort_list_var, card]) # resized version: 1920x1080 -> 1603x1080
     else:
-        reset_card(window, sort_list, card)
+        reset_card(window, sort_list_var, card)
 
     # Connect the different button to the tool
-    functions = [print('Nop'), print('Nop'), lambda: settings_window.build(window), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
+    functions = [print('Nop'), print('Nop'), lambda: settings_window.build(window), lambda: reset_card(window, sort_list_var, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
     buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     buttons_function = {}
     for i in range(len(functions)):
