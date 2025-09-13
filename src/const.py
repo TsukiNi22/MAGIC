@@ -78,6 +78,11 @@ class Window:
     LABEL_PADX = 15 # Padding X of the labels
     LABEL_PADY = 12.5 # Padding Y of the labels
 
+    # Settings
+    SETTING_WIDTH = 400 # X size of the settings subwindow
+    SETTING_HEIGHT = 400 # Y size of the settings subwindow
+    SETTING_PAD = 10 # Pad x & y of all the item
+
     # Popup
     POPUP_FONT = ("Arial", 15) # Font used for the popup
     POPUP_WIDTH = 400 # X size of the popup
@@ -143,7 +148,7 @@ class Text:
     """
     # Setup the used language
     LANGUAGE = "eng" # Default language used
-    AUTHORIZED_LANGUAGES = ["eng"] # Languages authorized
+    AUTHORIZED_LANGUAGES = ["eng", "fr"] # Languages authorized
 
     # Get the parameters
     with open("data\\parameters.save", "r", encoding="utf-8") as file:
@@ -175,6 +180,14 @@ class Text:
         "Button": "Button n°",
         "Parameter": "Parameter",
         "Unknown": "Unknown",
+        "Enabled": "Enabled",
+        "Disabled": "Disabled",
+
+        # Settings
+        "Settings": "Settings",
+        "Language": "Language",
+        "Loading Screen": "Loading Screen",
+        "Configuration": "Configuration",
 
         # Popup button text
         "Cancel": "Cancel",
@@ -231,4 +244,5 @@ class Text:
     # Language selection
     LANGUAGES = {
         "eng": english,
+        "fr": english,
     }

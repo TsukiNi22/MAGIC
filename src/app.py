@@ -8,7 +8,7 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 
 Edition:
-##  08/09/2025 by Tsukini
+##  13/09/2025 by Tsukini
 
 File Name:
 ##  app.py
@@ -25,10 +25,11 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, port_selection_window, upload_window # Build of the window items
+    from window_build import main_window, port_selection_window, upload_window, settings_window # Build of the window items
     from tool.reset_card import reset_card # Use to initialise/reset the card connection
     from tool.video_display import video_display # Used to display video
     from Class.card_interaction import Card # Used for the card interaction
+    from Class.parameters import Parameters # Used to read the parameters
 except ImportError as e:
     print(f"Import Error: {e}")
     exit(Error.FATAL_ERROR)
@@ -47,12 +48,16 @@ def app(window):
     # Setup the card
     card = Card(window, scrollable_frame)
 
-    # Display the loading screen
+    # Display the loading screen if activated else just setup card
     window.update()
-    video_display(window, "data\\video\\loading-animation_resized.mp4", card=[window, sort_list, card]) # resized version: 1920x1080 -> 1603x1080
+    loading = Parameters().get_parameter("loading")
+    if loading is not None and loading == "1":
+        video_display(window, "data\\video\\loading-animation_resized.mp4", card=[window, sort_list, card]) # resized version: 1920x1080 -> 1603x1080
+    else:
+        reset_card(window, sort_list, card)
 
     # Connect the different button to the tool
-    functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
+    functions = [print('Nop'), print('Nop'), lambda: settings_window.build(window), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
     buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     buttons_function = {}
     for i in range(len(functions)):

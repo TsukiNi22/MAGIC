@@ -8,7 +8,7 @@
  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
 
 Edition:
-##  10/09/2025 by Tsukini
+##  13/09/2025 by Tsukini
 
 File Name:
 ##  popup.py
@@ -67,7 +67,7 @@ class Parameters:
         for line in self.lignes:
             line_splited = line.split("=")
             if line_splited[0] == name:
-                return line_splited[1]
+                return line_splited[1].removesuffix("\n")
         return None
 
     def set_parameter(self, name, value):
@@ -78,7 +78,7 @@ class Parameters:
         found = False
         for i in range(len(self.lignes)):
             if self.lignes[i].split("=")[0] == name:
-                self.lignes[i] = f"{name}={value}"
+                self.lignes[i] = f"{name}={value}" + ("\n" if self.lignes[i] else "")
                 found = True
                 break
         if not found:
