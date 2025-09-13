@@ -44,13 +44,12 @@ def app(window):
     # Setup of the main window
     tab, scrollable_frame, sort_list, card_upload, card_manual_port = main_window.build(window)
 
+    # Setup the card
+    card = Card(window, scrollable_frame)
+
     # Display the loading screen
     window.update()
-    video_display(window, "data\\video\\loading_animation.mp4")
-
-    # Setup the card & loadind class
-    card = Card(window, scrollable_frame)
-    reset_card(window, sort_list, card, video=True)
+    video_display(window, "data\\video\\loading-animation_resized.mp4", card=[window, sort_list, card]) # resized version: 1920x1080 -> 1603x1080
 
     # Connect the different button to the tool
     functions = [print('Nop'), print('Nop'), print('Nop'), lambda: reset_card(window, sort_list, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
