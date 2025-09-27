@@ -25,7 +25,7 @@ from sys import exit
 
 # Import that can be checked
 try:
-    from window_build import main_window, port_selection_window, upload_window, settings_window # Build of the window items
+    from window_build import main_window, port_selection_window, config_manager_window, settings_window, upload_window # Build of the window items
     from tool.reset_card import reset_card # Use to initialise/reset the card connection
     from tool.video_display import video_display # Used to display video
     from Class.card_interaction import Card # Used for the card interaction
@@ -56,8 +56,8 @@ def app(window):
     else:
         reset_card(window, sort_list_var, card)
 
-    # Connect the different button to the tool
-    functions = [print('Nop'), print('Nop'), lambda: settings_window.build(window), lambda: reset_card(window, sort_list_var, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
+    # Connect the different button to the function
+    functions = [lambda: config_manager_window.build(window), lambda: print('Nop'), lambda: settings_window.build(window), lambda: reset_card(window, sort_list_var, card)] # Save Parameter, Parameter Manager, Script Editor, Update Card
     buttons_name = Text.LANGUAGES[Text.LANGUAGE]["Tab Buttons"]
     buttons_function = {}
     for i in range(len(functions)):

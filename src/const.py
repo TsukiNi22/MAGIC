@@ -78,15 +78,28 @@ class Window:
     LABEL_PADX = 15 # Padding X of the labels
     LABEL_PADY = 12.5 # Padding Y of the labels
 
+    # Textbox
+    TEXTBOX_FONT = ("Arial", 15) # Font used for the textbox
+    TEXTBOX_WIDTH = 400 # X size of the textbox
+    TEXTBOX_HEIGHT = 30 # Y size of the textbox
+    TEXTBOX_PADX = 5 # Padding X of the textbox
+    INVALID_FILENAME_CHARS = set('\\/:*?"<>|\n') # List of invalid char in file name
+
+    # Configuration
+    CONFIG_WIDTH = 700 # X size of the config manager subwindow
+    CONFIG_HEIGHT = 500 # Y size of the config manager subwindow
+    CONFIG_PAD = 7.5 # Pad x & y of all the item
+
     # Settings
     SETTING_WIDTH = 400 # X size of the settings subwindow
     SETTING_HEIGHT = 400 # Y size of the settings subwindow
     SETTING_PAD = 10 # Pad x & y of all the item
 
     # Popup
-    POPUP_FONT = ("Arial", 15) # Font used for the popup
+    POPUP_FONT = ("Arial", 12) # Font used for the popup
     POPUP_WIDTH = 400 # X size of the popup
     POPUP_HEIGHT = 175 # Y size of the popup
+    POPUP_BUTTON_WIDTH = 100 # X size of the buttons on the popup
 
     # Loading Overlay
     LOADING_OVERLAY_FONT = ("Arial", 18) # Font used for the loading overlay
@@ -101,6 +114,7 @@ class Color:
     WHITE = "#FFFFFF"
     DARK_GREY = "#222222"
     GREY = "#2D2D2D"
+    DARK_RED_HOVER = "#4A0C0C"
     DARK_RED = "#550E0E"
     RED = "#741010"
     BLUE = "#2F64B4"
@@ -167,6 +181,7 @@ class Text:
         "Unknown": "Unknown",
         "Enabled": "Enabled",
         "Disabled": "Disabled",
+        "Delete": "Delete",
         "card": "card",
         "script": "script",
         "port": "port",
@@ -199,11 +214,19 @@ class Text:
         "Sort B/P": "Button / Potentiometer",
         "Sort P/B": "Potentiometer / Button",
 
+        # Config manager
+        "Config Manager": "Config Manager",
+        "Actual Configuration": "Actual Configuration",
+        "Save Actual Config": "Save actual config as ↑",
+        "Config Question": "What do you want to do with this config 'NAME'?",
+        "Save Actual Config Error Name": "Empty name given, can't save the config!",
+        "Save Actual Config Error": "This config already exist, can't save the config!",
+
         # Settings
         "Settings": "Settings",
         "Language": "Language",
         "Loading Screen": "Loading Screen",
-        "Configuration": "Configuration",
+        "Configurations": "Configurations",
 
         # Loading overlay message
         "Port Connection Loading": "Serial port connection, Loading",

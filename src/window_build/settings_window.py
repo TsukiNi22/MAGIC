@@ -19,7 +19,7 @@ File Description:
 
 """ Import """
 # Import that can't be in the try
-from src.const import Error, Window, Color, Text
+from src.const import Error, Window, Text
 from sys import exit
 
 # Import that can be checked
@@ -34,7 +34,7 @@ except ImportError as e:
 """ Program """
 def build(window):
     """
-        Build the manual port selection window items
+        Build the setting editor window items
         :param window: Main window of the app
     """
 
@@ -82,7 +82,7 @@ def build(window):
     button.grid(row=1, column=1, padx=Window.SETTING_PAD, pady=Window.SETTING_PAD, sticky="ew")
 
     # Display of the actual config
-    scroll_frame = ctk.CTkScrollableFrame(subwindow, label_text=Text.LANGUAGES[Text.LANGUAGE]["Configuration"])
+    scroll_frame = ctk.CTkScrollableFrame(subwindow, label_text=Text.LANGUAGES[Text.LANGUAGE]["Actual Configuration"])
     scroll_frame.grid(row=2, column=0, columnspan=2, padx=Window.SETTING_PAD, pady=Window.SETTING_PAD, sticky="nsew")
 
     # Add each line of the config

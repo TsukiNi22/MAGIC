@@ -90,7 +90,7 @@ class Popup(ctk.CTkToplevel):
 
         # setup of the buttons
         for button_name in buttons:
-            button = ctk.CTkButton(buttons_frame, text=button_name, font=Window.POPUP_FONT, command=lambda x=button_name: self._set_result(x))
+            button = ctk.CTkButton(buttons_frame, width=Window.POPUP_BUTTON_WIDTH, text=button_name, font=Window.POPUP_FONT, command=lambda x=button_name: self._set_result(x))
             button.pack(side="left", padx=Window.BUTTON_PADX, pady=Window.BUTTON_PADY)
 
         # Setup action
